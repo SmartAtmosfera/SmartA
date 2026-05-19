@@ -237,7 +237,7 @@ a{color:inherit;text-decoration:none}
 .faq-item__q svg{flex-shrink:0;transition:transform var(--transition)}
 .faq-item.open .faq-item__q svg{transform:rotate(45deg)}
 .faq-item.open .faq-item__q{color:var(--primary)}
-.faq-item__a{display:none;padding:0 var(--space-6) var(--space-5);color:var(--text-muted);font-size:var(--text-sm);line-height:1.75}
+.faq-item__a{display:none;padding:0 var(--space-6) var(--space-5);color:var(--text-muted);font-size:14px;line-height:1.6}
 .faq-item.open .faq-item__a{display:block}
 
 /* ─── CONTACT CTA ─── */
@@ -291,6 +291,46 @@ a{color:inherit;text-decoration:none}
 @media(max-width:600px){.sticky-cta{display:flex}}
 .sticky-cta .btn{flex:1;justify-content:center;padding:var(--space-3) var(--space-4)}
 @media(max-width:600px){body{padding-bottom:72px}}
+
+.mini-badge{display:inline-flex;padding:8px 14px;border-radius:999px;background:var(--surface-off,#eef3f4);font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--text-muted,#5d6d73);margin-bottom:14px}
+.section-pad{padding:72px 0}
+.section-tint{background:var(--surface-2,#f0f5f5)}
+.two-col-diy{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:start}
+.diy-card{background:#fff;border:1px solid rgba(0,0,0,.1);border-radius:24px;padding:28px 32px;box-shadow:0 12px 40px rgba(0,0,0,.18);color:#1e1c17}
+.diy-row{display:grid;grid-template-columns:160px 1fr;gap:16px;padding:16px 0;border-bottom:1px solid rgba(0,0,0,.1);color:#1e1c17}
+
+.diy-row strong{color:var(--text,#142126)}
+@media(max-width:860px){.two-col-diy,.diy-row{grid-template-columns:1fr}}
+
+
+.diy-row strong{color:#142126;font-weight:700;font-size:var(--text-sm)}
+.diy-row span{color:#4a4844;font-size:var(--text-sm);line-height:1.5}
+.diy-row:last-child{border-bottom:none;padding-bottom:0}
+
+
+.cases-section{padding-block:clamp(var(--space-16),8vw,var(--space-24));background:radial-gradient(circle at top left, color-mix(in oklch,var(--primary) 10%,transparent), transparent 34%), var(--surface)}
+.cases-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:var(--space-10)}
+.case-card{background:var(--surface-2);border:1px solid var(--border);border-radius:20px;overflow:hidden;box-shadow:var(--shadow-sm);display:flex;flex-direction:column}
+.case-image-wrap{position:relative;aspect-ratio:16/9;overflow:hidden}
+.case-image{width:100%;height:100%;object-fit:cover;transition:transform .45s ease}
+.case-card:hover .case-image{transform:scale(1.04)}
+.case-badge{position:absolute;top:16px;left:16px;background:rgba(8,12,18,.78);color:#fff;border:1px solid rgba(255,255,255,.16);border-radius:999px;padding:8px 12px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+.case-body{padding:18px;display:flex;flex-direction:column;gap:10px;height:100%}
+.case-icon{font-size:20px}
+.case-meta{color:var(--text-muted);font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+.case-title{font-size:clamp(1.1rem,0.95rem + 0.35vw,1.35rem);font-weight:700;line-height:1.25}
+.case-text{color:var(--text-muted);font-size:14px;line-height:1.6}
+.case-list{list-style:none;display:grid;gap:8px;margin:0;padding:0}
+.case-list li{position:relative;padding-left:18px;color:var(--text-muted);font-size:var(--text-sm);line-height:1.65}
+.case-list li::before{content:'•';position:absolute;left:0;top:0;color:var(--primary);font-weight:800}
+.case-kit{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:12px 14px;color:var(--text-muted);font-size:13px;line-height:1.5}
+.case-kit strong{color:var(--text)}
+.case-price{margin-top:auto;padding-top:12px;border-top:1px solid var(--divider);display:flex;justify-content:space-between;align-items:end;gap:10px}
+.case-price span{color:var(--text-muted);font-size:var(--text-sm)}
+.case-price strong{font-size:clamp(1.05rem,0.95rem + .45vw,1.35rem);line-height:1;color:var(--accent);font-weight:800}
+@media(max-width:1100px){.cases-grid{grid-template-columns:repeat(2,minmax(0,1fr));}}
+@media(max-width:720px){.cases-grid{grid-template-columns:1fr;}}
+
 </style>
 <!-- Yandex.Metrika counter -->
 <script type="text/javascript">
@@ -330,6 +370,7 @@ a{color:inherit;text-decoration:none}
     </div>
     <nav class="nav__links" aria-label="Основная навигация">
       <a href="#services">Услуги</a>
+          <a href="#cases">Готовые кейсы</a>
       <a href="#process">Как работаем</a>
       <a href="#devices">Устройства</a>
       <a href="#reviews">Отзывы</a>
@@ -411,6 +452,49 @@ a{color:inherit;text-decoration:none}
 </section>
 
 <!-- ─── SERVICES ─── -->
+
+<!-- ─── SEGMENTS ─── -->
+<section id="segments" class="section-pad">
+  <div class="container">
+    <div class="section-label">Готовые решения</div>
+    <h2 class="section-title">Не всем нужен одинаковый умный дом</h2>
+    <div class="services__grid" style="margin-top:32px">
+      <article class="service-card">
+        <div class="mini-badge">Квартира</div>
+        <h3 class="service-card__title">Удобство каждый день</h3>
+        <p class="service-card__text">Умный свет, защита от протечек, сценарий «Ушли из дома», датчики и голосовое управление без лишних устройств.</p>
+      </article>
+      <article class="service-card">
+        <div class="mini-badge">Частный дом</div>
+        <h3 class="service-card__title">Безопасность и контроль</h3>
+        <p class="service-card__text">Свет на участке, датчики, вода, климат, уведомления и дистанционный контроль дома со смартфона.</p>
+      </article>
+      <article class="service-card">
+        <div class="mini-badge">Ремонт</div>
+        <h3 class="service-card__title">Закладываем всё заранее</h3>
+        <p class="service-card__text">Планируем выключатели, шторы, мастер-сценарии и точки расширения до чистовой отделки — без переделок потом.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+
+<!-- ─── INCLUDED ─── -->
+<section id="included" class="section-pad section-tint">
+  <div class="container">
+    <div class="section-label">Что входит</div>
+    <h2 class="section-title">Что вы получаете, когда заказываете монтаж под ключ</h2>
+    <div class="services__grid" style="margin-top:32px">
+      <div class="service-card"><h3 class="service-card__title">1. Разбор задачи</h3><p class="service-card__text">Сначала понимаем ваш объект, задачи и образ жизни, а потом уже предлагаем решение.</p></div>
+      <div class="service-card"><h3 class="service-card__title">2. Подбор комплекта</h3><p class="service-card__text">Собираем Aqara без несовместимых и лишних устройств, объясняем логику системы.</p></div>
+      <div class="service-card"><h3 class="service-card__title">3. Смета заранее</h3><p class="service-card__text">Показываем состав, цену и логику системы — без тумана и «потом доплатите».</p></div>
+      <div class="service-card"><h3 class="service-card__title">4. Монтаж и запуск</h3><p class="service-card__text">Устанавливаем, настраиваем Aqara Home, Алису и нужные сценарии.</p></div>
+      <div class="service-card"><h3 class="service-card__title">5. Проверка на месте</h3><p class="service-card__text">Проверяем при вас, что всё реально работает, а не просто числится в приложении.</p></div>
+      <div class="service-card"><h3 class="service-card__title">6. Поддержка после</h3><p class="service-card__text">Не оставляем один на один с приложением и автоматизацией после запуска.</p></div>
+    </div>
+  </div>
+</section>
+
 <section id="services" class="services" aria-label="Услуги">
   <div class="container">
     <div class="services__header">
@@ -462,6 +546,26 @@ a{color:inherit;text-decoration:none}
 </section>
 
 <!-- ─── PROCESS ─── -->
+
+<!-- ─── DIY ─── -->
+<section id="diy" class="section-pad">
+  <div class="container">
+    <div class="two-col-diy">
+      <div>
+        <div class="section-label">Почему не своими силами</div>
+        <h2 class="section-title">Собрать самому можно. Сделать удобно и без переделок — уже сложнее.</h2>
+        <p class="hero__sub" style="margin-top:16px">Проблемы начинаются не на покупке датчика, а на совместимости устройств, покрытии Zigbee, выборе выключателей и логике сценариев. Часть людей сначала тратит на «попробовать самому», а потом — на переделку.</p>
+      </div>
+      <div class="diy-card">
+        <div class="diy-row"><strong>Частая ошибка</strong><span>Покупают лишние или несовместимые устройства</span></div>
+        <div class="diy-row"><strong>Что потом</strong><span>Сценарии работают криво или всё живёт в разных приложениях</span></div>
+        <div class="diy-row"><strong>Ещё ошибка</strong><span>Не учитывают электрику, покрытие сети, задачи семьи</span></div>
+        <div class="diy-row"><strong>Итог</strong><span>Переделка, лишние траты и раздражение вместо удобства</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section id="process" class="process" aria-label="Как мы работаем">
   <div class="container">
     <div class="process__inner">
@@ -516,6 +620,60 @@ a{color:inherit;text-decoration:none}
 </section>
 
 <!-- ─── DEVICES ─── -->
+
+<section id="cases" class="cases-section" aria-label="Готовые кейсы умного дома Aqara">
+  <div class="container">
+    <div style="max-width:760px">
+      <div class="section-label reveal">Готовые кейсы</div>
+      <h2 class="section-title reveal">Не абстрактный умный дом, а <em>понятные решения под задачу</em></h2>
+      <p class="section-desc reveal">Собрали 8 готовых сценариев, чтобы клиент сразу понимал: что именно получает, какую проблему решает и в какой бюджет укладывается.</p>
+    </div>
+
+    <div class="cases-grid">
+      <article class="case-card reveal">
+        <div class="case-image-wrap"><img class="case-image" src="https://user-gen-media-assets.s3.amazonaws.com/gemini_images/c05ea9a6-7465-4670-b15c-064146254e40.png" alt="Умные выключатели Aqara H1 в квартире, управление светом со смартфона" width="720" height="405" loading="lazy"><span class="case-badge">Популярный</span></div>
+        <div class="case-body"><div class="case-icon">💡</div><div class="case-meta">Кейс 1</div><h3 class="case-title">Умный свет</h3><p class="case-text">Для квартиры, где хочется убрать бытовую возню со светом: выключать всё одной кнопкой, включать по движению и управлять голосом через Алису.</p><ul class="case-list"><li>Сцены «Вечер», «Кино», «Ушли из дома».</li><li>Автосвет в прихожей и коридоре.</li><li>Управление из приложения и голосом.</li><li>Подходит как старт в умный дом.</li></ul><div class="case-kit"><strong>Состав:</strong> Hub M2, 5 выключателей H1, датчик движения P1.</div><div class="case-price"><span>Под ключ</span><strong>~31 600 ₽</strong></div></div>
+      </article>
+
+      <article class="case-card reveal">
+        <div class="case-image-wrap"><img class="case-image" src="https://user-gen-media-assets.s3.amazonaws.com/gemini_images/71d92ed8-41c3-4182-91ac-e28f4eaf6d11.png" alt="Датчик протечки Aqara под раковиной, уведомление на телефоне" width="720" height="405" loading="lazy"><span class="case-badge">Защита</span></div>
+        <div class="case-body"><div class="case-icon">💧</div><div class="case-meta">Кейс 2</div><h3 class="case-title">Защита от протечки</h3><p class="case-text">Система для кухни, санузла и постирочной. При утечке воды датчики срабатывают, а краны перекрываются автоматически — без паники и мокрых соседей.</p><ul class="case-list"><li>Контроль мокрых зон в квартире или доме.</li><li>Автоматическое перекрытие воды.</li><li>Уведомление в телефон.</li><li>Полезно для объектов, которые часто пустуют.</li></ul><div class="case-kit"><strong>Состав:</strong> Hub M2, 4 датчика протечки T1, 2 привода крана T1.</div><div class="case-price"><span>Под ключ</span><strong>~43 939 ₽</strong></div></div>
+      </article>
+
+      <article class="case-card reveal">
+        <div class="case-image-wrap"><img class="case-image" src="https://user-gen-media-assets.s3.amazonaws.com/gemini_images/4b0b4081-336d-42dc-a6fe-263b64047e58.png" alt="Умный замок Aqara N100 на входной двери" width="720" height="405" loading="lazy"><span class="case-badge">Безопасность</span></div>
+        <div class="case-body"><div class="case-icon">🔐</div><div class="case-meta">Кейс 3</div><h3 class="case-title">Умный замок N100</h3><p class="case-text">Решение для входной двери без обычной возни с ключами. Доступ по отпечатку, коду, карте или смартфону — плюс история входов и временные коды для гостей.</p><ul class="case-list"><li>Несколько способов доступа для семьи.</li><li>Временные коды для гостей и сервиса.</li><li>Контроль входов в приложении.</li><li>Хорошо сочетается со сценой «Ушли из дома».</li></ul><div class="case-kit"><strong>Состав:</strong> Hub M2, умный замок Aqara N100.</div><div class="case-price"><span>Под ключ</span><strong>~41 698 ₽</strong></div></div>
+      </article>
+
+      <article class="case-card reveal">
+        <div class="case-image-wrap"><img class="case-image" src="https://user-gen-media-assets.s3.amazonaws.com/gemini_images/7beb772c-15f0-4ef1-a971-a73b55cf2677.png" alt="Датчик дыма Aqara на кухне во время задымления" width="720" height="405" loading="lazy"><span class="case-badge">Пожарная безопасность</span></div>
+        <div class="case-body"><div class="case-icon">🔥</div><div class="case-meta">Кейс 4</div><h3 class="case-title">Пожарная безопасность</h3><p class="case-text">Сценарий для квартиры, дома или дачи: контроль дыма и газа, тревога на телефон и сирена внутри объекта. Полезно там, где важно вовремя узнать о проблеме.</p><ul class="case-list"><li>Контроль дыма и утечки газа.</li><li>Сирена и уведомление на телефон.</li><li>Работа локально без интернета.</li><li>Можно связать с другими сценариями безопасности.</li></ul><div class="case-kit"><strong>Состав:</strong> Hub M2, 2 датчика дыма, 1 датчик газа.</div><div class="case-price"><span>Под ключ</span><strong>~30 669 ₽</strong></div></div>
+      </article>
+
+      <article class="case-card reveal">
+        <div class="case-image-wrap"><img class="case-image" src="https://user-gen-media-assets.s3.amazonaws.com/gemini_images/8567e2ad-038a-4dfd-8c7f-08246766a899.png" alt="Умная термоголовка Aqara E1 на радиаторе в комнате" width="720" height="405" loading="lazy"><span class="case-badge">Климат</span></div>
+        <div class="case-body"><div class="case-icon">❄️</div><div class="case-meta">Кейс 5</div><h3 class="case-title">Умное отопление</h3><p class="case-text">Подходит, если в спальне жарко, в детской прохладно, а батареи живут своей жизнью. Температуру можно настраивать по комнатам и по расписанию.</p><ul class="case-list"><li>Отдельная температура в разных комнатах.</li><li>Экономичный режим в ваше отсутствие.</li><li>Управление с телефона и голосом.</li><li>Полезно для квартиры и дома с радиаторами.</li></ul><div class="case-kit"><strong>Состав:</strong> Hub M2, 6 термоголовок E1, 3 датчика климата.</div><div class="case-price"><span>Под ключ</span><strong>~51 399 ₽</strong></div></div>
+      </article>
+
+      <article class="case-card reveal">
+        <div class="case-image-wrap"><img class="case-image" src="https://user-gen-media-assets.s3.amazonaws.com/gemini_images/882b4cb5-0c3d-4fc7-9e3a-5e76648a5528.png" alt="Комплект умного дома Aqara в современной квартире" width="720" height="405" loading="lazy"><span class="case-badge">Хит продаж</span></div>
+        <div class="case-body"><div class="case-icon">🏠</div><div class="case-meta">Кейс 6</div><h3 class="case-title">Стартовый умный дом</h3><p class="case-text">Базовый комплект для квартиры 2–3 комнаты: свет, движение, двери и защита от протечки. Лучший вариант, если хочется начать с ощутимой пользы и потом расширяться.</p><ul class="case-list"><li>Сразу закрывает основные бытовые задачи.</li><li>Даёт понятный эффект с первого дня.</li><li>Не перегружает бюджет.</li><li>Легко расширяется шторами, климатом и замком.</li></ul><div class="case-kit"><strong>Состав:</strong> Hub M2, 4 выключателя H1, 3 датчика открытия, 2 датчика движения, 2 датчика протечки.</div><div class="case-price"><span>Под ключ</span><strong>~46 177 ₽</strong></div></div>
+      </article>
+
+      <article class="case-card reveal">
+        <div class="case-image-wrap"><img class="case-image" src="https://user-gen-media-assets.s3.amazonaws.com/gemini_images/62c96cbd-0316-44a7-a521-7e0a03b484d2.png" alt="Загородный дом с системой безопасности Aqara" width="720" height="405" loading="lazy"><span class="case-badge">Дача / дом</span></div>
+        <div class="case-body"><div class="case-icon">🏡</div><div class="case-meta">Кейс 7</div><h3 class="case-title">Умная дача</h3><p class="case-text">Удалённый контроль загородного дома: двери, окна, движение, температура, протечки и дым. Удобно, когда объект не под ежедневным присмотром.</p><ul class="case-list"><li>Контроль дома, пока вы в городе.</li><li>Подходит для зимы и межсезонья.</li><li>Локальные сценарии работают без интернета.</li><li>Хороший стартовый уровень мониторинга.</li></ul><div class="case-kit"><strong>Состав:</strong> Hub M3, датчики открытия, движения, протечки, климата и дыма.</div><div class="case-price"><span>Под ключ</span><strong>~51 166 ₽</strong></div></div>
+      </article>
+
+      <article class="case-card reveal">
+        <div class="case-image-wrap"><img class="case-image" src="https://user-gen-media-assets.s3.amazonaws.com/gemini_images/d87c8662-1e68-42c2-9ccb-5b040eafcfa5.png" alt="Умные шторы Aqara автоматически открываются утром" width="720" height="405" loading="lazy"><span class="case-badge">Комфорт</span></div>
+        <div class="case-body"><div class="case-icon">🛋️</div><div class="case-meta">Кейс 8</div><h3 class="case-title">Умные шторы</h3><p class="case-text">Один из самых наглядных и приятных сценариев: шторы открываются по расписанию, по голосу или как часть сцены вместе со светом и климатом.</p><ul class="case-list"><li>Открытие по времени и сценариям.</li><li>Голосовое управление через Алису.</li><li>Подходит для спальни и гостиной.</li><li>Хорошо работает в связке со светом.</li></ul><div class="case-kit"><strong>Состав:</strong> Hub M2, 2 мотора Curtain Driver E1.</div><div class="case-price"><span>Под ключ</span><strong>~32 797 ₽</strong></div></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+
 <section id="devices" class="devices" aria-label="Устройства Aqara">
   <div class="container">
     <div class="devices__inner">
@@ -789,6 +947,20 @@ a{color:inherit;text-decoration:none}
 </section>
 
 <!-- ─── REVIEWS ─── -->
+
+<!-- ─── CASES ─── -->
+<section id="cases" class="section-pad section-tint">
+  <div class="container">
+    <div class="section-label">Примеры решений</div>
+    <h2 class="section-title">Как это выглядит на типовых задачах</h2>
+    <div class="services__grid" style="margin-top:32px">
+      <article class="service-card"><div class="mini-badge">Квартира · 78 м²</div><h3 class="service-card__title">Свет + протечки + сценарий «Ушли из дома»</h3><p class="service-card__text">Собрали удобное управление светом, защиту от протечек и единый сценарий отключения лишних зон.</p></article>
+      <article class="service-card"><div class="mini-badge">Дом · 160 м²</div><h3 class="service-card__title">Контроль дома с телефона</h3><p class="service-card__text">Настроили датчики открытия, уведомления, уличный свет и контроль ключевых зон дистанционно.</p></article>
+      <article class="service-card"><div class="mini-badge">Новостройка · ремонт</div><h3 class="service-card__title">Умные зоны заложили заранее</h3><p class="service-card__text">Предусмотрели мастер-кнопки, шторы и будущие сценарии ещё до чистовой отделки.</p></article>
+    </div>
+  </div>
+</section>
+
 <section id="reviews" class="reviews" aria-label="Отзывы клиентов">
   <div class="container" style="margin-bottom:var(--space-10)">
     <div class="section-label reveal">Отзывы</div>
@@ -983,7 +1155,7 @@ a{color:inherit;text-decoration:none}
     </div>
     <div class="footer__bottom">
       <span class="footer__copy">© 2026 СмартАтмосфера. Екатеринбург.</span>
-      <span class="footer__copy">ИП · ИНН 000000000000</span>
+      <span class="footer__copy">Работаем по Екатеринбургу и области</span>
     </div>
   </div>
 </footer>
