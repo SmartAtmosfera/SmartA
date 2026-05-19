@@ -331,6 +331,23 @@ a{color:inherit;text-decoration:none}
 @media(max-width:1100px){.cases-grid{grid-template-columns:repeat(2,minmax(0,1fr));}}
 @media(max-width:720px){.cases-grid{grid-template-columns:1fr;}}
 
+
+.case-filter-bar{display:flex;flex-wrap:wrap;gap:12px;margin-top:var(--space-8);margin-bottom:var(--space-6)}
+.case-filter-chip{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border:1px solid var(--border);background:var(--surface-2);border-radius:999px;color:var(--text-muted);font-size:13px;font-weight:700;letter-spacing:.02em;transition:all var(--transition)}
+.case-filter-chip:hover{border-color:var(--primary);color:var(--primary);transform:translateY(-1px)}
+.compare{padding-block:clamp(var(--space-14),7vw,var(--space-20));background:var(--surface)}
+.compare-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.compare-card{background:var(--surface-2);border:1px solid var(--border);border-radius:20px;padding:22px;box-shadow:var(--shadow-sm)}
+.compare-card h3{font-size:clamp(1.05rem,.95rem + .3vw,1.25rem);margin-bottom:14px}
+.compare-card ul{list-style:none;display:grid;gap:10px;padding:0;margin:0}
+.compare-card li{position:relative;padding-left:18px;color:var(--text-muted);font-size:14px;line-height:1.6}
+.compare-card li::before{content:'•';position:absolute;left:0;top:0;color:var(--primary);font-weight:800}
+.compare-card--accent{background:color-mix(in oklch,var(--primary) 9%,var(--surface-2));border-color:color-mix(in oklch,var(--primary) 35%,var(--border))}
+.precontact{padding-block:clamp(var(--space-14),7vw,var(--space-20));background:linear-gradient(180deg,var(--bg),var(--surface))}
+.precontact-box{display:grid;grid-template-columns:1.6fr 1fr;gap:24px;align-items:center;padding:28px;border:1px solid var(--border);background:var(--surface-2);border-radius:24px;box-shadow:var(--shadow-md)}
+.precontact-actions{display:flex;flex-direction:column;gap:12px;justify-self:end}
+@media(max-width:980px){.compare-grid{grid-template-columns:1fr}.precontact-box{grid-template-columns:1fr}.precontact-actions{justify-self:start;width:100%}.precontact-actions .btn{width:100%;justify-content:center}}
+
 </style>
 <!-- Yandex.Metrika counter -->
 <script type="text/javascript">
@@ -344,6 +361,20 @@ a{color:inherit;text-decoration:none}
     ym(109291009, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
 </script>
 <noscript><div><img src="https://mc.yandex.ru/watch/109291009" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+    (function(m,e,t,r,i,k,a){
+        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=109301351', 'ym');
+
+    ym(109301351, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/109301351" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 <!-- /Yandex.Metrika counter -->
 
 </head>
@@ -370,7 +401,7 @@ a{color:inherit;text-decoration:none}
     </div>
     <nav class="nav__links" aria-label="Основная навигация">
       <a href="#services">Услуги</a>
-          <a href="#cases">Готовые кейсы</a>
+          <a href="#cases">Решения и цены</a>
       <a href="#process">Как работаем</a>
       <a href="#devices">Устройства</a>
       <a href="#reviews">Отзывы</a>
@@ -624,9 +655,15 @@ a{color:inherit;text-decoration:none}
 <section id="cases" class="cases-section" aria-label="Готовые кейсы умного дома Aqara">
   <div class="container">
     <div style="max-width:760px">
-      <div class="section-label reveal">Готовые кейсы</div>
+      <div class="section-label reveal">Решения и цены</div>
       <h2 class="section-title reveal">Не абстрактный умный дом, а <em>понятные решения под задачу</em></h2>
-      <p class="section-desc reveal">Собрали 8 готовых сценариев, чтобы клиент сразу понимал: что именно получает, какую проблему решает и в какой бюджет укладывается.</p>
+      <p class="section-desc reveal">Чтобы не выбирать из сотни датчиков вслепую, собрали понятные решения по задачам: свет, безопасность, климат и комфорт. Это не потолочная фантазия маркетолога, а рабочие стартовые пакеты, которые можно адаптировать под квартиру, дом или ремонт.</p>
+    </div>
+
+    <div class="case-filter-bar reveal" aria-label="Быстрый выбор решения">
+      <a href="#contact" class="case-filter-chip">Нужна смета под объект</a>
+      <a href="#quiz" class="case-filter-chip">Подобрать по задаче</a>
+      <a href="#services" class="case-filter-chip">Посмотреть все услуги</a>
     </div>
 
     <div class="cases-grid">
@@ -952,11 +989,47 @@ a{color:inherit;text-decoration:none}
 <section id="cases" class="section-pad section-tint">
   <div class="container">
     <div class="section-label">Примеры решений</div>
-    <h2 class="section-title">Как это выглядит на типовых задачах</h2>
+    <h2 class="section-title">Типовые сценарии для квартиры, дома и ремонта</h2>
     <div class="services__grid" style="margin-top:32px">
       <article class="service-card"><div class="mini-badge">Квартира · 78 м²</div><h3 class="service-card__title">Свет + протечки + сценарий «Ушли из дома»</h3><p class="service-card__text">Собрали удобное управление светом, защиту от протечек и единый сценарий отключения лишних зон.</p></article>
       <article class="service-card"><div class="mini-badge">Дом · 160 м²</div><h3 class="service-card__title">Контроль дома с телефона</h3><p class="service-card__text">Настроили датчики открытия, уведомления, уличный свет и контроль ключевых зон дистанционно.</p></article>
       <article class="service-card"><div class="mini-badge">Новостройка · ремонт</div><h3 class="service-card__title">Умные зоны заложили заранее</h3><p class="service-card__text">Предусмотрели мастер-кнопки, шторы и будущие сценарии ещё до чистовой отделки.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="compare" aria-label="Почему с интегратором проще">
+  <div class="container">
+    <div style="max-width:760px;margin-bottom:var(--space-10)">
+      <div class="section-label reveal">Понятный выбор</div>
+      <h2 class="section-title reveal">С чем чаще всего сравнивают <em>наше решение</em></h2>
+      <p class="section-desc reveal">Большинство клиентов выбирают между тремя сценариями: собрать самому, позвать обычного электрика или сделать систему под ключ с настройкой и поддержкой. На практике дороже всего обычно обходится именно переделка.</p>
+    </div>
+    <div class="compare-grid reveal">
+      <div class="compare-card">
+        <h3>Собрать самому</h3>
+        <ul>
+          <li>Нужно разбираться в совместимости устройств.</li>
+          <li>Часто покупают лишнее или не то.</li>
+          <li>Ошибки всплывают уже после покупки.</li>
+        </ul>
+      </div>
+      <div class="compare-card">
+        <h3>Обычный монтажник</h3>
+        <ul>
+          <li>С электрикой ок, но автоматизации часто поверхностные.</li>
+          <li>Редко продумывают сценарии и масштабирование.</li>
+          <li>Поддержка после запуска бывает формальной.</li>
+        </ul>
+      </div>
+      <div class="compare-card compare-card--accent">
+        <h3>СмартАтмосфера</h3>
+        <ul>
+          <li>Подбор комплекта под задачу и бюджет.</li>
+          <li>Монтаж, настройка, сценарии и обучение в одном цикле.</li>
+          <li>Смета до начала работ и поддержка после запуска.</li>
+        </ul>
+      </div>
     </div>
   </div>
 </section>
@@ -1088,7 +1161,7 @@ a{color:inherit;text-decoration:none}
       <div>
         <div class="section-label">Свяжитесь с нами</div>
         <h2 class="section-title">Обсудим ваш <em>проект</em></h2>
-        <p class="section-desc" style="margin-bottom:var(--space-6)">Бесплатный выезд и консультация по Екатеринбургу. Ответим в течение 30 минут в рабочее время.</p>
+        <p class="section-desc" style="margin-bottom:var(--space-6)">Бесплатно подскажем, с чего лучше начать: с готового пакета, отдельной задачи или системы под ключ. Ответим в течение 30 минут в рабочее время.</p>
         <div class="cta-section__contacts">
           <a href="tel:+79612021807" class="contact-link">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.5 19.79 19.79 0 0 1 1.61 4.94 2 2 0 0 1 3.6 2.73h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 10.09a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 17.5"/></svg>
@@ -1132,7 +1205,7 @@ a{color:inherit;text-decoration:none}
           </svg>
           <span style="font-weight:700;font-size:var(--text-base)">СмартАтмосфера</span>
         </div>
-        <p class="footer__tagline">Монтаж умного дома на базе Aqara в Екатеринбурге. Профессионально, быстро, с гарантией.</p>
+        <p class="footer__tagline">Монтаж умного дома на базе Aqara в Екатеринбурге: свет, безопасность, климат, сценарии и настройка под ключ.</p>
       </div>
       <div>
         <div class="footer__col-title">Услуги</div>
