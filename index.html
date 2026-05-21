@@ -876,61 +876,70 @@ a{color:inherit;text-decoration:none}
 </div>
 </section>
 <!-- ─── FAQ ─── -->
-<section aria-label="Частые вопросы" class="faq" id="faq">
+
+<section class="faq" id="faq">
 <div class="container">
-<div class="section-label reveal">FAQ</div>
-<h2 class="section-title reveal">Частые <em>вопросы</em></h2>
-<div class="faq__list">
+<div class="section-label">FAQ</div>
+<h2 class="section-title">Частые вопросы</h2>
+<div class="faq-list">
 <div class="faq-item">
 <button aria-expanded="false" class="faq-item__q" onclick="toggleFaq(this)">
           Нужно ли менять проводку?
           <svg fill="none" height="20" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="20"><line x1="12" x2="12" y1="5" y2="19"></line><line x1="5" x2="19" y1="12" y2="12"></line></svg>
 </button>
-<div class="faq-item__a">В большинстве случаев нет. Умные выключатели Aqara устанавливаются вместо обычных в существующие подрозетники. Если у вас двух- или трёхпроводная схема — всё отлично. При однопроводной может потребоваться небольшая доработка, которую мы уточним при выезде.</div>
+<div class="faq-item__a">
+          В большинстве случаев нет. Умные выключатели Aqara устанавливаются вместо обычных в существующие подрозетники. Если у вас двухпроводная схема, подбираем подходящее решение или аккуратно добавляем ноль.
+        </div>
 </div>
 <div class="faq-item">
 <button aria-expanded="false" class="faq-item__q" onclick="toggleFaq(this)">
           Работает ли система без интернета?
           <svg fill="none" height="20" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="20"><line x1="12" x2="12" y1="5" y2="19"></line><line x1="5" x2="19" y1="12" y2="12"></line></svg>
 </button>
-<div class="faq-item__a">Да! Это ключевое преимущество Aqara. Хаб хранит все автоматизации локально — свет, датчики и расписания работают без интернета. Управление с телефона через локальную сеть Wi-Fi тоже работает. Для голосовых команд Алисы нужен интернет.</div>
+<div class="faq-item__a">
+          Да. Хаб Aqara хранит автоматизации локально, поэтому свет, датчики, расписания и сцены работают даже без интернета. Интернет нужен только для удалённого доступа.
+        </div>
 </div>
 <div class="faq-item">
 <button aria-expanded="false" class="faq-item__q" onclick="toggleFaq(this)">
           Совместимо с Алисой и Apple Home?
           <svg fill="none" height="20" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="20"><line x1="12" x2="12" y1="5" y2="19"></line><line x1="5" x2="19" y1="12" y2="12"></line></svg>
 </button>
-<div class="faq-item__a">Да. Aqara официально поддерживает Яндекс Алису, Apple HomeKit, Google Home и Amazon Alexa. Настроим всё, что вам нужно. Алиса через умную колонку — один из самых популярных вариантов у наших клиентов.</div>
+<div class="faq-item__a">
+          Да. Aqara официально поддерживает Яндекс Алису, Apple HomeKit, Google Home и другие платформы. Настроим голосовое управление и сценарии под ваши устройства.
+        </div>
 </div>
 <div class="faq-item">
 <button aria-expanded="false" class="faq-item__q" onclick="toggleFaq(this)">
-          Можно ли добавить устройства позже?
+          Сколько занимает монтаж?
           <svg fill="none" height="20" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="20"><line x1="12" x2="12" y1="5" y2="19"></line><line x1="5" x2="19" y1="12" y2="12"></line></svg>
 </button>
-<div class="faq-item__a">Конечно. Система Aqara масштабируется — начните с умного света в одной комнате, потом добавляйте датчики, шторы, климат. Новые устройства подключаются к тому же хабу буквально за несколько минут.</div>
+<div class="faq-item__a">
+          Базовый умный свет и датчики обычно ставим за 1 день. Более сложные объекты с климатом и безопасностью занимают 1–2 дня в зависимости от объёма работ.
+        </div>
 </div>
 <div class="faq-item">
 <button aria-expanded="false" class="faq-item__q" onclick="toggleFaq(this)">
-          Как долго длится монтаж?
+          Работаете только в Екатеринбурге?
           <svg fill="none" height="20" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="20"><line x1="12" x2="12" y1="5" y2="19"></line><line x1="5" x2="19" y1="12" y2="12"></line></svg>
 </button>
-<div class="faq-item__a">Умный свет в одной комнате — 2–3 часа. Типовая 2-комнатная квартира с светом, хабом и базовыми датчиками — один рабочий день. Полный умный дом под ключ в большом доме — 2–3 дня. Точные сроки называем после выезда.</div>
-</div>
-
-<div class="faq-item">
-<button aria-expanded="false" class="faq-item__q">Работаете только в Екатеринбурге?
-    <svg fill="none" height="18" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="18"><line x1="12" x2="12" y1="5" y2="19"></line><line x1="5" x2="19" y1="12" y2="12"></line></svg>
-</button>
-<div class="faq-item__a" style="display:none;padding:0 var(--space-6) var(--space-5);color:var(--text-muted);font-size:14px;line-height:1.6">В основном работаем в Екатеринбурге, но выезжаем и по области — уточните при звонке, обычно договариваемся.</div>
+<div class="faq-item__a">
+          Основные выезды делаем по Екатеринбургу, но работаем и по области. Уточните адрес — обычно договариваемся, если объект в разумном радиусе.
+        </div>
 </div>
 <div class="faq-item">
-<button aria-expanded="false" class="faq-item__q">Можно заказать только часть: например, только умный свет?
-    <svg fill="none" height="18" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="18"><line x1="12" x2="12" y1="5" y2="19"></line><line x1="5" x2="19" y1="12" y2="12"></line></svg>
+<button aria-expanded="false" class="faq-item__q" onclick="toggleFaq(this)">
+          Можно заказать только умный свет или только защиту от протечки?
+          <svg fill="none" height="20" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="20"><line x1="12" x2="12" y1="5" y2="19"></line><line x1="5" x2="19" y1="12" y2="12"></line></svg>
 </button>
-<div class="faq-item__a" style="display:none;padding:0 var(--space-6) var(--space-5);color:var(--text-muted);font-size:14px;line-height:1.6">Да, мы работаем с любым объёмом — от одного умного выключателя до полной автоматизации. Начать с малого — разумно.</div>
-</div></div>
+<div class="faq-item__a">
+          Да. Мы работаем с любым объёмом — от одного умного выключателя или пары датчиков до полной системы умного дома. Начать с конкретной задачи — нормальный путь.
+        </div>
+</div>
+</div>
 </div>
 </section>
+
 <!-- ─── CTA SECTION ─── -->
 <section aria-label="Контакты и обратная связь" class="cta-section">
 <div class="container">
