@@ -130,7 +130,21 @@ a{color:inherit;text-decoration:none}
 .hero{position:relative;min-height:100svh;display:flex;align-items:center;padding-top:68px;overflow:clip}
 .hero__bg{position:absolute;inset:0;z-index:0}
 .hero__bg img{width:100%;height:100%;object-fit:cover;object-position:center}
-.hero__overlay{position:absolute;inset:0;background:linear-gradient(135deg,oklch(0.1 0.03 165/.92) 0%,oklch(0.12 0.02 150/.75) 50%,oklch(0.08 0.01 180/.6) 100%)}
+```css id="m9u7pe"
+.hero__overlay{
+position:absolute;
+inset:0;
+
+background:
+linear-gradient(
+135deg,
+rgba(8,12,18,.92) 0%,
+rgba(10,18,22,.82) 45%,
+rgba(8,12,18,.68) 100%
+);
+}
+```
+
 .hero__content{position:relative;z-index:1;padding-block:clamp(var(--space-16),10vw,var(--space-24))}
 .hero__eyebrow{display:inline-flex;align-items:center;gap:var(--space-2);background:color-mix(in oklch,var(--primary) 15%,transparent);border:1px solid color-mix(in oklch,var(--primary) 30%,transparent);color:var(--primary);padding:var(--space-1) var(--space-3);border-radius:var(--radius-full);font-size:var(--text-xs);font-weight:600;letter-spacing:.06em;text-transform:uppercase;margin-bottom:var(--space-6)}
 [data-theme="light"] .hero__eyebrow{background:color-mix(in oklch,var(--primary) 12%,transparent);color:var(--primary-h)}
@@ -496,34 +510,175 @@ a{color:inherit;text-decoration:none}
 <a href="#quiz" onclick="closeMob()">Рассчитать стоимость</a>
 <a href="tel:+79612021807" style="color:var(--primary)">+7 (961) 202-18-07</a>
 </nav>
+```html id="dh8ocf"
 <!-- ─── HERO ─── -->
 <main id="main">
+
 <section aria-label="Главный экран" class="hero">
-<div aria-hidden="true" class="hero__bg">
-<img alt="" decoding="async" height="1080" src="https://user-gen-media-assets.s3.amazonaws.com/gemini_images/657a80bd-b939-42d3-8ab6-25760c3a5cc5.png" width="1920"/>
-<div class="hero__overlay"></div>
-</div>
-<div class="container hero__content">
-<div class="hero__eyebrow"><svg fill="currentColor" height="12" viewbox="0 0 12 12" width="12"><circle cx="6" cy="6" r="6"></circle></svg> Екатеринбург и область</div>
-<h1 class="hero__title">
-      Умный дом<br/>
-<em class="display">без лишних</em><br/>
-      проводов
+
+  <!-- BACKGROUND -->
+  <div aria-hidden="true" class="hero__bg">
+
+    <img
+      src="https://user-gen-media-assets.s3.amazonaws.com/gemini_images/657a80bd-b939-42d3-8ab6-25760c3a5cc5.png"
+      alt=""
+      width="1920"
+      height="1080"
+      decoding="async"
+    />
+
+    <div class="hero__overlay"></div>
+
+  </div>
+
+  <!-- CONTENT -->
+  <div class="container hero__content">
+
+    <!-- EYEBROW -->
+    <div class="hero__eyebrow">
+
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor">
+        <circle cx="6" cy="6" r="6"></circle>
+      </svg>
+
+      Екатеринбург и область
+
+    </div>
+
+    <!-- TITLE -->
+    <h1 class="hero__title">
+      Установим<br>
+      <em class="display">умный дом Aqara</em><br>
+      без ремонта и штробления
     </h1>
-<p class="hero__desc">Устанавливаем Aqara за 1 день: свет, климат, шторы и безопасность под управлением Алисы и приложения — без штробления и лишнего ремонта.</p>
-<div class="hero__cta">
-<button class="btn btn-primary btn-lg" onclick="scrollToQuiz()">
-<svg fill="none" height="18" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="18"><polyline points="9 11 12 14 22 4"></polyline><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>
-        Рассчитать стоимость
+
+    <!-- DESC -->
+    <p class="hero__desc">
+
+      Умный свет, защита от протечки,
+      климат, шторы и безопасность
+      с управлением через Алису
+      и приложение Aqara.
+
+      Монтаж обычно занимает 1 день.
+
+    </p>
+
+    <!-- CTA -->
+    <div class="hero__cta">
+
+      <!-- BUTTON -->
+      <button
+        class="btn btn-primary btn-lg"
+        onclick="scrollToQuiz()"
+      >
+
+        <svg
+          width="18"
+          height="18"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <polyline points="9 11 12 14 22 4"></polyline>
+          <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+        </svg>
+
+        Получить смету за 15 минут
+
       </button>
-<a class="btn btn-ghost btn-lg" href="tel:+79612021807" style="color:#fff;border-color:rgba(255,255,255,.35)">
-<svg fill="none" height="18" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="18"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.5 19.79 19.79 0 0 1 1.61 4.94 2 2 0 0 1 3.6 2.73h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 10.09a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 17.5"></path></svg>
-        Позвонить
+
+      <!-- TELEGRAM -->
+      <a
+        class="btn btn-tg btn-lg"
+        href="https://t.me/smartAtmosfera"
+        target="_blank"
+        rel="noopener"
+      >
+
+        <svg
+          width="18"
+          height="18"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+        >
+          <path d="M9.04 15.47 8.67 20c.53 0 .76-.23 1.04-.5l2.5-2.4 5.18 3.8c.95.53 1.62.25 1.88-.88L23 3.97h0c.31-1.45-.52-2.02-1.45-1.67L1.9 9.84c-1.4.55-1.38 1.33-.24 1.68l5.02 1.57L18.3 5.8c.55-.33 1.06-.15.65.21"/>
+        </svg>
+
+        Написать в Telegram
+
       </a>
-</div>
-<div class="hero__trust"><div><div class="hero__trust-num">1 день</div><span class="hero__trust-label">Монтаж</span></div><div><div class="hero__trust-num">2 года</div><span class="hero__trust-label">Гарантия</span></div><div><div class="hero__trust-num">Без штробления</div><span class="hero__trust-label">И лишнего ремонта</span></div></div>
-</div>
+
+    </div>
+
+    <!-- MICRO TRUST -->
+    <div class="hero__microtrust">
+
+      <div class="hero__microitem">
+        ✅ Без штробления стен
+      </div>
+
+      <div class="hero__microitem">
+        ✅ Монтаж за 1 день
+      </div>
+
+      <div class="hero__microitem">
+        ✅ Работает даже без интернета
+      </div>
+
+      <div class="hero__microitem">
+        ✅ Настроим Алису под вас
+      </div>
+
+    </div>
+
+    <!-- TRUST -->
+    <div class="hero__trust">
+
+      <div>
+
+        <div class="hero__trust-num">
+          1 день
+        </div>
+
+        <span class="hero__trust-label">
+          Средний монтаж квартиры
+        </span>
+
+      </div>
+
+      <div>
+
+        <div class="hero__trust-num">
+          2 года
+        </div>
+
+        <span class="hero__trust-label">
+          Гарантия на монтаж
+        </span>
+
+      </div>
+
+      <div>
+
+        <div class="hero__trust-num">
+          Aqara
+        </div>
+
+        <span class="hero__trust-label">
+          Надёжная система с поддержкой Алисы
+        </span>
+
+      </div>
+
+    </div>
+
+  </div>
+
 </section>
+```
+
 <!-- ─── SERVICES ─── -->
 <!-- ─── SEGMENTS ─── -->
 <!-- ─── INCLUDED ─── -->
