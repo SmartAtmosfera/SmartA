@@ -86,6 +86,8 @@ a{color:inherit;text-decoration:none}
 .btn-lg{padding:var(--space-4) var(--space-8);font-size:var(--text-base);border-radius:var(--radius-xl)}
 .btn-tg{background:#229ED9;color:#fff}
 .btn-tg:hover{background:#1a8abf}
+.btn-max{background:#1e6f5c;color:#fff}
+.btn-max:hover{background:#0f5a48}
 .skip-link{position:fixed;top:-100px;left:var(--space-2);z-index:9999;padding:var(--space-2) var(--space-4);background:var(--primary);color:var(--text-inv);border-radius:var(--radius-md);font-size:var(--text-sm);font-weight:600;transition:top .15s}
 .skip-link:focus{top:var(--space-2)}
 .nav{position:fixed;top:0;left:0;right:0;z-index:100;height:68px;display:flex;align-items:center;background:color-mix(in oklch,var(--bg) 85%,transparent);backdrop-filter:blur(16px);border-bottom:1px solid oklch(from var(--text) l c h/.07)}
@@ -149,6 +151,78 @@ a{color:inherit;text-decoration:none}
   .floating-chat { bottom: 80px; right: 16px; }
   .chat-button { padding: 10px 16px; font-size: 12px; }
 }
+/* МОДАЛКА ВЫБОРА МЕССЕНДЖЕРА */
+.modal-messenger {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  backdrop-filter: blur(6px);
+  z-index: 10000;
+  align-items: center;
+  justify-content: center;
+}
+.modal-messenger.active {
+  display: flex;
+}
+.messenger-card {
+  background: var(--surface);
+  border-radius: var(--radius-2xl);
+  padding: 2rem;
+  max-width: 320px;
+  width: 90%;
+  text-align: center;
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--border);
+}
+.messenger-card h3 {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  margin-bottom: 1rem;
+}
+.messenger-card p {
+  margin-bottom: 1.5rem;
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+}
+.messenger-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.messenger-buttons button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px;
+  border-radius: var(--radius-lg);
+  font-weight: 600;
+  transition: all 0.2s;
+  width: 100%;
+}
+.btn-messenger-tg {
+  background: #229ED9;
+  color: white;
+}
+.btn-messenger-max {
+  background: #1e6f5c;
+  color: white;
+}
+.btn-messenger-tg:hover, .btn-messenger-max:hover {
+  filter: brightness(1.05);
+  transform: translateY(-2px);
+}
+.messenger-close {
+  margin-top: 16px;
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-size: var(--text-sm);
+  cursor: pointer;
+  text-decoration: underline;
+}
+/* остальные стили без изменений */
 .hero{position:relative;min-height:100svh;display:flex;align-items:center;padding-top:68px;overflow:clip}
 .hero__bg{position:absolute;inset:0;z-index:0}
 .hero__bg img{width:100%;height:100%;object-fit:cover;object-position:center}
@@ -374,13 +448,13 @@ a{color:inherit;text-decoration:none}
 <header class="nav"><div class="nav__inner"><div class="nav__logo" id="logoHome"><svg aria-label="СмартАтмосфера лого" fill="none" height="36" viewbox="0 0 36 36" width="36"><rect fill="var(--primary)" height="36" rx="10" width="36"></rect><path d="M10 22 L18 11 L26 22" fill="none" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2"></path><circle cx="18" cy="25" fill="white" r="2.5"></circle><circle cx="18" cy="11" fill="white" r="1.8"></circle></svg><div><div class="nav__logo-text">СмартАтмосфера</div><div class="nav__logo-sub">Умный дом · Екатеринбург</div></div></div><nav aria-label="Основная навигация" class="nav__links"><a href="#services">Услуги</a><a href="#solutions">Пакеты</a><a href="#process">Как работаем</a><a href="#devices">Оборудование</a><a href="#reviews">Отзывы</a><a href="#faq">FAQ</a></nav><div class="nav__actions"><a class="nav__phone" href="tel:+79612021807">+7 (961) 202-18-07</a><button aria-label="Переключить тему" class="theme-toggle" data-theme-toggle=""><svg fill="none" height="18" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="18"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button><button aria-label="Меню" class="burger" id="burgerBtn"><svg fill="none" height="22" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="22"><line x1="3" x2="21" y1="6" y2="6"></line><line x1="3" x2="21" y1="12" y2="12"></line><line x1="3" x2="21" y1="18" y2="18"></line></svg></button></div></div></header>
 <nav aria-label="Мобильное меню" class="mob-menu" id="mobMenu"><a href="#services" onclick="closeMob()">Услуги</a><a href="#solutions" onclick="closeMob()">Пакеты</a><a href="#process" onclick="closeMob()">Как работаем</a><a href="#devices" onclick="closeMob()">Устройства</a><a href="#reviews" onclick="closeMob()">Отзывы</a><a href="#faq" onclick="closeMob()">FAQ</a><a href="#quiz" onclick="closeMob()">Рассчитать стоимость</a><a href="tel:+79612021807" style="color:var(--primary)">+7 (961) 202-18-07</a></nav>
 <main id="main">
-<!-- HERO -->
+<!-- HERO (без изменений) -->
 <section aria-label="Главный экран" class="hero"><div aria-hidden="true" class="hero__bg"><img alt="" decoding="async" height="1080" src="https://user-gen-media-assets.s3.amazonaws.com/gemini_images/657a80bd-b939-42d3-8ab6-25760c3a5cc5.png" width="1920"/><div class="hero__overlay"></div></div><div class="container hero__content"><div class="hero__eyebrow"><svg fill="currentColor" height="12" viewbox="0 0 12 12" width="12"><circle cx="6" cy="6" r="6"></circle></svg>Екатеринбург и Свердловская область</div><h1 class="hero__title">Умный дом Aqara<br/><em class="display">под ключ</em> в Екатеринбурге<br/>без штробления</h1><p class="hero__desc">Устанавливаем Aqara за 1 день: свет, климат, шторы и безопасность под управлением Алисы и приложения — без штробления и лишнего ремонта.</p><div class="hero__cta"><button class="btn btn-primary btn-lg" onclick="scrollToQuiz()"><svg fill="none" height="18" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="18"><polyline points="9 11 12 14 22 4"></polyline><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path></svg>Рассчитать стоимость</button><a class="btn btn-ghost btn-lg" href="tel:+79612021807" style="color:#fff;border-color:rgba(255,255,255,.35)"><svg fill="none" height="18" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="18"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.5 19.79 19.79 0 0 1 1.61 4.94 2 2 0 0 1 3.6 2.73h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 10.09a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.73 17.5"></path></svg>Позвонить</a></div><div class="hero__packages"><div class="package-badge"><div class="package-badge__price">от 12 000 ₽</div><div class="package-badge__label">Умный свет</div></div><div class="package-badge"><div class="package-badge__price">от 18 000 ₽</div><div class="package-badge__label">Безопасность</div></div><div class="package-badge"><div class="package-badge__price">от 45 000 ₽</div><div class="package-badge__label">Под ключ</div></div></div></div></section>
 
-<!-- SERVICES -->
+<!-- SERVICES (без изменений) -->
 <section class="services" id="services"><div class="container"><div class="services__header"><div><div class="section-label">Что мы делаем</div><h2 class="section-title">Монтаж <em>любой сложности</em></h2></div><p class="section-desc">От одного умного выключателя до полной автоматизации квартиры или загородного дома.</p></div><div class="services__grid"><article class="svc-card reveal"><div class="svc-card__num">01</div><h3 class="svc-card__title">Умный свет</h3><p class="svc-card__desc">Замена выключателей на Aqara, настройка сцен освещения, интеграция с Алисой и Siri. Без штробления стен.</p><div class="svc-card__price"><span class="svc-card__price-val">от 3 500 ₽</span><span class="svc-card__price-note">за точку</span></div></article><article class="svc-card svc-card--featured reveal"><div class="svc-card__num">02</div><h3 class="svc-card__title">Умный дом под ключ</h3><p class="svc-card__desc">Проектирование, поставка оборудования, монтаж и настройка всей системы: свет, климат, шторы, датчики безопасности, камеры.</p><div class="svc-card__price"><span class="svc-card__price-val">от 45 000 ₽</span><span class="svc-card__price-note">квартира от 50 м²</span></div></article><article class="svc-card reveal"><div class="svc-card__num">03</div><h3 class="svc-card__title">Климат и безопасность</h3><p class="svc-card__desc">Умные термостаты, датчики температуры и влажности, управление кондиционером, датчики открытия дверей и окон, сирены.</p><div class="svc-card__price"><span class="svc-card__price-val">от 12 000 ₽</span><span class="svc-card__price-note">комплект</span></div></article><article class="svc-card reveal"><div class="svc-card__num">04</div><h3 class="svc-card__title">Обслуживание и апгрейд</h3><p class="svc-card__desc">Обновление прошивок, расширение уже установленной системы, диагностика и ремонт. Приедем в удобное время.</p><div class="svc-card__price"><span class="svc-card__price-val">от 1 500 ₽</span><span class="svc-card__price-note">выезд</span></div></article></div></div></section>
 
-<!-- ПАКЕТЫ ПОД КЛЮЧ -->
+<!-- ПАКЕТЫ ПОД КЛЮЧ (без изменений) -->
 <section class="solutions" id="solutions"><div class="container"><div class="section-label">Пакеты под ключ</div><h2 class="section-title">Выберите <em>ваш идеальный вариант</em></h2><div class="filter-bar" id="filterBar"><button class="filter-chip active" data-filter="all">Все</button><button class="filter-chip" data-filter="light">💡 Свет</button><button class="filter-chip" data-filter="safety">🔒 Безопасность</button><button class="filter-chip" data-filter="climate">🌡️ Климат</button><button class="filter-chip" data-filter="full">🏠 Под ключ</button></div><div class="solutions-grid" id="solutionsGrid">
   <div class="solution-card" data-category="light"><div class="solution-badge popular">🔥 Самый популярный</div><div class="solution-icon">💡</div><div class="solution-title">Умный свет</div><div class="solution-price">31 600 ₽</div><div class="solution-meta"><span class="meta-item">⏱️ 1 день</span><span class="meta-item">🛡️ 2 года гарантии</span><span class="meta-item">🚚 Бесплатный выезд</span></div><ul class="solution-features"><li>Сцены «Вечер», «Кино», «Ушли»</li><li>Автосвет в прихожей и коридоре</li><li>Управление из приложения и голосом</li><li>Hub M2 + 5 выключателей H1 + датчик движения</li></ul><button class="btn btn-primary solution-btn" onclick="scrollToQuiz()">Заказать →</button><div class="solution-utp"><span>✅ Работает без интернета</span><span>🎤 Алиса / Siri</span></div></div>
   <div class="solution-card" data-category="safety"><div class="solution-icon">💧</div><div class="solution-title">Защита от протечки</div><div class="solution-price">43 900 ₽</div><div class="solution-meta"><span class="meta-item">⏱️ 1 день</span><span class="meta-item">🛡️ 2 года гарантии</span><span class="meta-item">🚚 Бесплатный выезд</span></div><ul class="solution-features"><li>Контроль мокрых зон в квартире или доме</li><li>Автоматическое перекрытие воды</li><li>Уведомление в телефон</li><li>Hub M2 + 4 датчика протечки T1 + 2 привода крана T1</li></ul><button class="btn btn-primary solution-btn" onclick="scrollToQuiz()">Заказать →</button><div class="solution-utp"><span>✅ Работает без интернета</span><span>💧 Защита от потопа</span></div></div>
@@ -392,67 +466,175 @@ a{color:inherit;text-decoration:none}
 </div>
 <div class="consult-block"><h3>📞 Нужна консультация?</h3><p>Закажите бесплатный выезд мастера — подберём решение под вашу квартиру или дом без скрытых платежей.</p><button class="btn btn-primary btn-lg" onclick="scrollToQuiz()">Заказать бесплатный выезд →</button></div></div></section>
 
-<!-- КАК МЫ РАБОТАЕМ -->
+<!-- КАК МЫ РАБОТАЕМ (без изменений) -->
 <section class="process" id="process"><div class="container"><div class="process__inner"><div><div class="section-label reveal">Как мы работаем</div><h2 class="section-title reveal">Три шага <em>к умному дому</em></h2><p class="section-desc reveal" style="margin-bottom:var(--space-10)">Без лишней суеты: берём на себя подбор, монтаж и настройку — вам остаётся только пользоваться.</p><div class="process__steps"><div class="step reveal"><div class="step__num">1</div><div><div class="step__title"><span>📞</span> Консультация и выезд</div><div class="step__desc">Разберём вашу задачу, приедем на объект, оценим электрику и подготовим понятную смету. Бесплатно.</div></div></div><div class="step reveal"><div class="step__num">2</div><div><div class="step__title"><span>🔧</span> Поставка и монтаж</div><div class="step__desc">Сами закупим оборудование, аккуратно установим устройства Aqara, настроим хаб, сценарии и голосовое управление.</div></div></div><div class="step reveal"><div class="step__num">3</div><div><div class="step__title"><span>🎓</span> Обучение и поддержка</div><div class="step__desc">Покажем, как всем пользоваться, оставим понятные инструкции и дадим 2 года гарантии на монтаж.</div></div></div></div><div class="process__trust reveal"><div class="trust-badge"><div class="trust-badge__value">10+ лет</div><div class="trust-badge__label">в электромонтаже</div></div><div class="trust-badge"><div class="trust-badge__value">2 года</div><div class="trust-badge__label">гарантии на монтаж</div></div></div></div><div class="process__photo reveal"><img alt="Монтаж системы умного дома Aqara" decoding="async" height="1024" loading="lazy" src="./generated-image-5.jpg" width="768"/></div></div></div></section>
 
-<!-- ОСНОВАТЕЛЬ -->
+<!-- ОСНОВАТЕЛЬ (без изменений) -->
 <section class="owner" id="about"><div class="container"><div class="owner__inner"><div class="owner__img reveal"><img alt="Андрей — основатель СмартАтмосфера" decoding="async" height="800" loading="lazy" src="./owner_360.jpg" width="640" onerror="this.src='https://placehold.co/640x800/1a1b18/2ab5a0?text=Андрей'"/></div><div class="owner__content reveal"><div class="section-label">Кто мы</div><h2 class="owner__name">Андрей — <em>основатель</em></h2><p class="owner__desc">Занимаюсь электромонтажом более 10 лет. Умный дом начал изучать, когда сам установил Aqara в своей квартире — и понял, что это реально меняет жизнь. Теперь помогаю другим сделать то же самое без лишних проблем.</p><p class="owner__desc">Я не просто монтажник — у меня профессиональное образование по электрике, поэтому делаю всё по уму: без «ковровых» решений, без лишних расходов для клиента. Каждый проект — под вашу задачу, а не по шаблону.</p><div class="owner__stats"><div class="stat-item"><div class="stat-item__value">10+ лет</div><div class="stat-item__label">в электромонтаже</div></div><div class="stat-item"><div class="stat-item__value">Профильное</div><div class="stat-item__label">образование по электрике</div></div><div class="stat-item"><div class="stat-item__value">Под задачу</div><div class="stat-item__label">не по шаблону</div></div></div></div></div></div></section>
 
-<!-- ПРЕИМУЩЕСТВА -->
+<!-- ПРЕИМУЩЕСТВА (без изменений) -->
 <section class="advantages"><div class="container"><div class="section-label reveal">Почему выбирают нас</div><h2 class="section-title reveal">Работать с нами <em>выгодно и удобно</em></h2><div class="advantages__grid"><div class="advantage-card reveal"><div class="advantage-icon">🚚</div><div class="advantage-title">Бесплатный выезд</div><div class="advantage-desc">Приедем на замер в удобное время, составим смету — всё бесплатно, без скрытых условий.</div></div><div class="advantage-card reveal"><div class="advantage-icon">🛡️</div><div class="advantage-title">Гарантия 2 года</div><div class="advantage-desc">На все виды монтажных работ. Уверенность в качестве и спокойствие для вас.</div></div><div class="advantage-card reveal"><div class="advantage-icon">🔧</div><div class="advantage-title">Работаем с Aqara</div><div class="advantage-desc">Только оригинальное оборудование с локальными сценариями, без облачной зависимости.</div></div><div class="advantage-card reveal"><div class="advantage-icon">📱</div><div class="advantage-title">Настройка под ключ</div><div class="advantage-desc">Сценарии, голосовое управление, интеграция с Алисой и Apple Home — всё настроим.</div></div><div class="advantage-card reveal"><div class="advantage-icon">💡</div><div class="advantage-title">Помощь с выбором</div><div class="advantage-desc">Не знаете, с чего начать? Подберём оптимальный набор устройств под ваш бюджет и задачи.</div></div></div></div></section>
 
-<!-- УСТРОЙСТВА -->
+<!-- УСТРОЙСТВА (без изменений) -->
 <section aria-label="Устройства Aqara" class="devices" id="devices"><div class="container"><div class="devices__inner"><div><div class="section-label reveal">Оборудование</div><h2 class="section-title reveal">Работаем <em>на Aqara</em></h2><p class="section-desc reveal" style="margin-bottom:var(--space-10)">Aqara — мировой лидер в сегменте умного дома. Все устройства работают без интернета, совместимы с Алисой, Apple Home и Google Home.</p><div class="devices__list"><div class="device-item reveal"><div class="device-item__dot"></div><div><div class="device-item__title">Умные выключатели и диммеры</div><div class="device-item__desc">Устанавливаются вместо обычных, управляются с телефона и голосом.</div></div></div><div class="device-item reveal"><div class="device-item__dot"></div><div><div class="device-item__title">Хаб и шлюзы</div><div class="device-item__desc">Мозг системы. Обеспечивает работу всех устройств офлайн, без зависимости от облака.</div></div></div><div class="device-item reveal"><div class="device-item__dot"></div><div><div class="device-item__title">Датчики движения, дверей, протечки</div><div class="device-item__desc">Работают от батарейки 2–3 года. Мгновенные уведомления на телефон.</div></div></div><div class="device-item reveal"><div class="device-item__dot"></div><div><div class="device-item__title">Умные шторы и жалюзи</div><div class="device-item__desc">Автоматическое открытие утром, управление сценами освещения.</div></div></div><div class="device-item reveal"><div class="device-item__dot"></div><div><div class="device-item__title">Климатическое оборудование</div><div class="device-item__desc">Термостаты, датчики CO₂, управление кондиционером по расписанию.</div></div></div></div></div><div class="devices__img reveal"><img alt="Устройства умного дома Aqara" decoding="async" height="480" loading="lazy" src="https://user-gen-media-assets.s3.amazonaws.com/gemini_images/66e43d99-786e-49bf-8543-461fa021fd45.png" width="600"/></div></div></div></section>
 
-<!-- КАЛЬКУЛЯТОР -->
-<section aria-label="Калькулятор стоимости" class="quiz" id="quiz"><div class="container--narrow"><div style="text-align:center;margin-bottom:var(--space-10)"><div class="section-label reveal" style="justify-content:center;display:flex">Калькулятор</div><h2 class="section-title reveal">Рассчитайте <em>за 2 минуты</em></h2><p class="section-desc reveal" style="margin-inline:auto">Ответьте на 4 вопроса — мы сразу назовём примерную стоимость и свяжемся с вами.</p></div><div class="quiz__wrapper reveal"><div class="quiz__card" id="quizCard"><div class="quiz__progress"><div class="quiz__progress-bar" id="quizBar" style="width:25%"></div></div><div class="quiz__step active" id="qs1"><div class="quiz__question">Что хотите автоматизировать?</div><div class="quiz__options"><button class="quiz__option" data-step="1" data-val="Умный свет (выключатели)" onclick="selectOpt(this)">💡 Умный свет</button><button class="quiz__option" data-step="1" data-val="Безопасность и датчики" onclick="selectOpt(this)">🔒 Безопасность и датчики</button><button class="quiz__option" data-step="1" data-val="Климат и шторы" onclick="selectOpt(this)">🌡 Климат и шторы</button><button class="quiz__option" data-step="1" data-val="Всё под ключ" onclick="selectOpt(this)">🏠 Всё под ключ</button></div><div class="quiz__nav"><span>Шаг 1 из 4</span><button class="btn btn-primary" onclick="nextStep(2)">Далее →</button></div></div><div class="quiz__step" id="qs2"><div class="quiz__question">Тип объекта?</div><div class="quiz__options"><button class="quiz__option" data-step="2" data-val="1-комн. квартира" onclick="selectOpt(this)">1-комнатная</button><button class="quiz__option" data-step="2" data-val="2-3-комн. квартира" onclick="selectOpt(this)">2–3 комнаты</button><button class="quiz__option" data-step="2" data-val="Частный дом" onclick="selectOpt(this)">Частный дом</button></div><div class="quiz__nav"><button class="btn btn-ghost" onclick="prevStep(1)">← Назад</button><button class="btn btn-primary" onclick="nextStep(3)">Далее →</button></div></div><div class="quiz__step" id="qs3"><div class="quiz__question">Состояние электрики?</div><div class="quiz__options"><button class="quiz__option" data-step="3" data-val="Новостройка" onclick="selectOpt(this)">Новостройка / ремонт</button><button class="quiz__option" data-step="3" data-val="Рабочая" onclick="selectOpt(this)">Обычная, рабочая</button><button class="quiz__option" data-step="3" data-val="Старая" onclick="selectOpt(this)">Старая, нужна замена</button></div><div class="quiz__nav"><button class="btn btn-ghost" onclick="prevStep(2)">← Назад</button><button class="btn btn-primary" onclick="nextStep(4)">Далее →</button></div></div><div class="quiz__step" id="qs4"><div class="quiz__question">Когда планируете?</div><div class="quiz__options"><button class="quiz__option" data-step="4" data-val="Срочно" onclick="selectOpt(this)">Срочно, неделя</button><button class="quiz__option" data-step="4" data-val="Месяц" onclick="selectOpt(this)">В течение месяца</button><button class="quiz__option" data-step="4" data-val="Не срочно" onclick="selectOpt(this)">Присматриваюсь</button></div><div class="quiz__nav"><button class="btn btn-ghost" onclick="prevStep(3)">← Назад</button><button class="btn btn-primary" onclick="calcResult()">Рассчитать →</button></div></div><div class="quiz__result" id="qResult"><svg width="64" height="64" viewBox="0 0 64 64"><circle cx="32" cy="32" r="30" stroke="currentColor" stroke-width="2" fill="none" opacity=".25"/><polyline points="20 32 28 40 44 24" stroke="currentColor" stroke-width="3" fill="none"/></svg><div><div class="quiz__result-price" id="qPrice">от 18 000 ₽</div><p class="quiz__result-note">Точная цена после бесплатного выезда. Оставьте контакт — свяжемся через 30 мин.</p></div><div class="quiz__contact-form"><input type="text" id="qName" placeholder="Ваше имя" class="quiz__input"><input type="tel" id="qPhone" placeholder="Телефон или Telegram" class="quiz__input"><div class="quiz__send-btns"><button class="btn btn-tg" onclick="sendQuiz('tg')">Telegram</button><button class="btn btn-primary" onclick="sendQuiz('call')">Перезвоните</button></div><div class="policy-text">Нажимая кнопку, вы соглашаетесь с обработкой данных</div></div></div><div class="quiz__success" id="qSuccess"><div class="quiz__success-icon">✅</div><h3>Заявка принята!</h3><p>Свяжемся в течение 30 минут.</p></div></div></div></div></section>
+<!-- КАЛЬКУЛЯТОР (ИСПРАВЛЕНА ЛОГИКА ПЕРЕХОДОВ) -->
+<section aria-label="Калькулятор стоимости" class="quiz" id="quiz"><div class="container--narrow"><div style="text-align:center;margin-bottom:var(--space-10)"><div class="section-label reveal" style="justify-content:center;display:flex">Калькулятор</div><h2 class="section-title reveal">Рассчитайте <em>за 2 минуты</em></h2><p class="section-desc reveal" style="margin-inline:auto">Ответьте на 4 вопроса — мы сразу назовём примерную стоимость и свяжемся с вами.</p></div><div class="quiz__wrapper reveal"><div class="quiz__card" id="quizCard"><div class="quiz__progress"><div class="quiz__progress-bar" id="quizBar" style="width:25%"></div></div>
+<!-- Шаг 1 -->
+<div class="quiz__step active" id="qs1"><div class="quiz__question">Что хотите автоматизировать?</div><div class="quiz__options"><button class="quiz__option" data-step="1" data-val="Умный свет (выключатели)" onclick="selectOpt(this)">💡 Умный свет</button><button class="quiz__option" data-step="1" data-val="Безопасность и датчики" onclick="selectOpt(this)">🔒 Безопасность и датчики</button><button class="quiz__option" data-step="1" data-val="Климат и шторы" onclick="selectOpt(this)">🌡 Климат и шторы</button><button class="quiz__option" data-step="1" data-val="Всё под ключ" onclick="selectOpt(this)">🏠 Всё под ключ</button></div><div class="quiz__nav"><span>Шаг 1 из 4</span><button class="btn btn-primary" onclick="nextStep(2)">Далее →</button></div></div>
+<!-- Шаг 2 -->
+<div class="quiz__step" id="qs2"><div class="quiz__question">Тип объекта?</div><div class="quiz__options"><button class="quiz__option" data-step="2" data-val="1-комн. квартира" onclick="selectOpt(this)">1-комнатная</button><button class="quiz__option" data-step="2" data-val="2-3-комн. квартира" onclick="selectOpt(this)">2–3 комнаты</button><button class="quiz__option" data-step="2" data-val="Частный дом" onclick="selectOpt(this)">Частный дом</button></div><div class="quiz__nav"><button class="btn btn-ghost" onclick="prevStep(1)">← Назад</button><button class="btn btn-primary" onclick="nextStep(3)">Далее →</button></div></div>
+<!-- Шаг 3 -->
+<div class="quiz__step" id="qs3"><div class="quiz__question">Состояние электрики?</div><div class="quiz__options"><button class="quiz__option" data-step="3" data-val="Новостройка" onclick="selectOpt(this)">Новостройка / ремонт</button><button class="quiz__option" data-step="3" data-val="Рабочая" onclick="selectOpt(this)">Обычная, рабочая</button><button class="quiz__option" data-step="3" data-val="Старая" onclick="selectOpt(this)">Старая, нужна замена</button></div><div class="quiz__nav"><button class="btn btn-ghost" onclick="prevStep(2)">← Назад</button><button class="btn btn-primary" onclick="nextStep(4)">Далее →</button></div></div>
+<!-- Шаг 4 -->
+<div class="quiz__step" id="qs4"><div class="quiz__question">Когда планируете?</div><div class="quiz__options"><button class="quiz__option" data-step="4" data-val="Срочно" onclick="selectOpt(this)">Срочно, неделя</button><button class="quiz__option" data-step="4" data-val="Месяц" onclick="selectOpt(this)">В течение месяца</button><button class="quiz__option" data-step="4" data-val="Не срочно" onclick="selectOpt(this)">Присматриваюсь</button></div><div class="quiz__nav"><button class="btn btn-ghost" onclick="prevStep(3)">← Назад</button><button class="btn btn-primary" onclick="calcResult()">Рассчитать →</button></div></div>
 
-<!-- ОТЗЫВЫ -->
+<div class="quiz__result" id="qResult"><svg width="64" height="64" viewBox="0 0 64 64"><circle cx="32" cy="32" r="30" stroke="currentColor" stroke-width="2" fill="none" opacity=".25"/><polyline points="20 32 28 40 44 24" stroke="currentColor" stroke-width="3" fill="none"/></svg><div><div class="quiz__result-price" id="qPrice">от 18 000 ₽</div><p class="quiz__result-note">Точная цена после бесплатного выезда. Оставьте контакт — свяжемся через 30 мин.</p></div><div class="quiz__contact-form"><input type="text" id="qName" placeholder="Ваше имя" class="quiz__input"><input type="tel" id="qPhone" placeholder="Телефон или Telegram" class="quiz__input"><div class="quiz__send-btns"><button class="btn btn-tg" onclick="sendQuiz('tg')">Написать в мессенджер</button><button class="btn btn-primary" onclick="callFromQuiz()">Перезвоните</button></div><div class="policy-text">Нажимая кнопку, вы соглашаетесь с обработкой данных</div></div></div><div class="quiz__success" id="qSuccess"><div class="quiz__success-icon">✅</div><h3>Заявка принята!</h3><p>Свяжемся в течение 30 минут.</p></div></div></div></div></section>
+
+<!-- ОТЗЫВЫ (без изменений) -->
 <section aria-label="Отзывы клиентов" class="reviews" id="reviews"><div class="container"><div class="reviews__header"><div><div class="section-label reveal">Отзывы</div><h2 class="section-title reveal">Реальные отзывы <em>клиентов</em></h2></div><div class="reviews__external"><a href="#" class="ext-link" target="_blank" rel="noopener">📊 Яндекс.Карты</a><a href="#" class="ext-link" target="_blank" rel="noopener">📈 Google Maps</a><a href="#" class="ext-link" target="_blank" rel="noopener">⭐ 2ГИС</a></div></div><div class="reviews__rating-summary reveal"><div class="rating-value">5,0</div><div class="rating-stars-big">★★★★★</div><div class="rating-text" style="color:var(--text-muted); font-size:var(--text-sm)">— средняя оценка на основе 5 отзывов</div></div><div class="reviews__track" style="padding-inline:clamp(var(--space-4),4vw,var(--space-12))"><article class="review-card"><div class="review-card__rating"><div class="review-card__stars">★★★★★</div><div class="review-card__rating-value">5,0</div></div><p class="review-card__text">"Поставили умный свет во всей квартире за один день. Алиса слушается с первого раза, дети в восторге. Мастер объяснил всё понятно, без лишнего давления."</p><div class="review-card__author"><div class="review-card__avatar">АК</div><div><div class="review-card__name">Алексей Краснов</div><div class="review-card__meta">2-комн. квартира · Екатеринбург · март 2026</div></div></div></article><article class="review-card"><div class="review-card__rating"><div class="review-card__stars">★★★★★</div><div class="review-card__rating-value">5,0</div></div><p class="review-card__text">"Брали умный дом под ключ — 3 комнаты, прихожая, кухня. Всё работает без нареканий уже 4 месяца. Особенно радует автоматизация штор — просыпаемся с рассветом."</p><div class="review-card__author"><div class="review-card__avatar">МС</div><div><div class="review-card__name">Марина Соловьёва</div><div class="review-card__meta">Умный дом под ключ · январь 2026</div></div></div></article><article class="review-card"><div class="review-card__rating"><div class="review-card__stars">★★★★★</div><div class="review-card__rating-value">5,0</div></div><p class="review-card__text">"Заказывал датчики протечки и умные розетки на кухню. Цена честная, всё объяснили, настроили уведомления. Рекомендую — никакой воды, которую льют на мозги другие компании."</p><div class="review-card__author"><div class="review-card__avatar">ДВ</div><div><div class="review-card__name">Дмитрий Власов</div><div class="review-card__meta">Безопасность и датчики · февраль 2026</div></div></div></article><article class="review-card"><div class="review-card__rating"><div class="review-card__stars">★★★★★</div><div class="review-card__rating-value">5,0</div></div><p class="review-card__text">"Установили систему контроля доступа и видеодомофон Aqara. Всё работает чётко, мастер подсказал, как настроить временные коды для гостей. Очень доволен сервисом."</p><div class="review-card__author"><div class="review-card__avatar">ИК</div><div><div class="review-card__name">Игорь Ковалёв</div><div class="review-card__meta">Частный дом · Екатеринбург · декабрь 2025</div></div></div></article><article class="review-card"><div class="review-card__rating"><div class="review-card__stars">★★★★★</div><div class="review-card__rating-value">5,0</div></div><p class="review-card__text">"Приятно удивлён оперативностью: позвонил утром, приехали в этот же день, сделали замер, через два дня уже был полностью готов умный свет во всей квартире. Спасибо!"</p><div class="review-card__author"><div class="review-card__avatar">ОП</div><div><div class="review-card__name">Ольга Петрова</div><div class="review-card__meta">1-комн. квартира · Екатеринбург · ноябрь 2025</div></div></div></article></div><div class="scroll-hint">← листайте →</div></div></section>
 
-<!-- FAQ -->
+<!-- FAQ (без изменений) -->
 <section class="faq" id="faq"><div class="container"><div class="section-label">FAQ</div><h2 class="section-title">Частые вопросы</h2><div class="faq-list"><div class="faq-item"><button class="faq-item__q" onclick="toggleFaq(this)">Нужно ли менять проводку?<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button><div class="faq-item__a">В большинстве случаев нет. Умные выключатели устанавливаются в стандартные подрозетники. При старой проводке подберем решение.</div></div><div class="faq-item"><button class="faq-item__q" onclick="toggleFaq(this)">Работает ли система без интернета?<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button><div class="faq-item__a">Да, хаб Aqara хранит сценарии локально. Даже без интернета работают свет, датчики, расписания.</div></div><div class="faq-item"><button class="faq-item__q" onclick="toggleFaq(this)">Совместимо с Алисой и Apple Home?<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button><div class="faq-item__a">Да. Официальная поддержка Яндекс Алисы, Apple HomeKit, Google Home. Настроим под ваш сценарий.</div></div><div class="faq-item"><button class="faq-item__q" onclick="toggleFaq(this)">Сколько занимает монтаж в Екатеринбурге?<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button><div class="faq-item__a">Базовый умный свет – 1 день. Полная система под ключ – 1–2 дня. Выезжаем по Екатеринбургу и Свердловской области.</div></div></div></div></section>
 
-<!-- SEO БЛОК -->
+<!-- SEO БЛОК (без изменений) -->
 <div class="seo-block container"><div class="section-label">Почему выбирают нас в Екатеринбурге</div><h3 class="section-title">Монтаж Aqara <em>с гарантией качества</em></h3><p>Мы работаем с Aqara более 10 лет. Выполняем проекты любой сложности: от установки одного датчика до полной автоматизации коттеджа. Выезжаем на замер бесплатно, даём 2 года гарантии на монтаж. Используем только оригинальное оборудование с локальными сценариями — ваш умный дом не перестанет работать даже при отключении интернета. Работаем с клиентами в Екатеринбурге, Свердловской области, а также соседних районах.</p></div>
 
-<!-- CTA -->
-<section aria-label="Контакты и обратная связь" class="cta-section"><div class="container"><div class="cta-section__inner"><div><div class="section-label">Свяжитесь с нами</div><h2 class="section-title">Обсудим ваш <em>проект</em></h2><p>Бесплатно подскажем, с чего начать. Ответим в течение 30 минут.</p><div class="cta-section__contacts"><a class="contact-link" href="tel:+79612021807">📞 +7 (961) 202-18-07</a><a class="contact-link" href="https://t.me/smartatmosfera" target="_blank">📱 Telegram: @smartatmosfera</a></div></div><form class="cta-form" id="ctaForm" onsubmit="submitCta(event)"><input type="text" id="ctaName" placeholder="Ваше имя" required><input type="tel" id="ctaPhone" placeholder="Телефон" required><textarea id="ctaMsg" placeholder="Опишите задачу (необязательно)"></textarea><button class="btn btn-primary" type="submit">Отправить заявку</button><div class="policy-text">Нажимая кнопку, вы соглашаетесь с обработкой персональных данных</div><div class="cta-form__success" id="ctaSuccess">✓ Заявка отправлена! Свяжемся в течение 30 минут.</div></form></div></div></section>
+<!-- CTA (без изменений, ссылка на модалку) -->
+<section aria-label="Контакты и обратная связь" class="cta-section"><div class="container"><div class="cta-section__inner"><div><div class="section-label">Свяжитесь с нами</div><h2 class="section-title">Обсудим ваш <em>проект</em></h2><p>Бесплатно подскажем, с чего начать. Ответим в течение 30 минут.</p><div class="cta-section__contacts"><a class="contact-link" href="tel:+79612021807">📞 +7 (961) 202-18-07</a><a class="contact-link" href="#" onclick="openMessengerChoice(); return false;">📱 Написать в мессенджер</a></div></div><form class="cta-form" id="ctaForm" onsubmit="submitCta(event)"><input type="text" id="ctaName" placeholder="Ваше имя" required><input type="tel" id="ctaPhone" placeholder="Телефон" required><textarea id="ctaMsg" placeholder="Опишите задачу (необязательно)"></textarea><button class="btn btn-primary" type="submit">Отправить заявку</button><div class="policy-text">Нажимая кнопку, вы соглашаетесь с обработкой персональных данных</div><div class="cta-form__success" id="ctaSuccess">✓ Заявка отправлена! Свяжемся в течение 30 минут.</div></form></div></div></section>
 </main>
 
-<footer class="footer"><div class="container"><div class="footer__inner"><div class="footer__brand"><svg width="32" height="32" viewBox="0 0 36 36" fill="none"><rect width="36" height="36" rx="10" fill="var(--primary)"/><path d="M10 22 L18 11 L26 22" stroke="white" stroke-width="2.2" fill="none"/><circle cx="18" cy="25" r="2.5" fill="white"/></svg><span>СмартАтмосфера</span><p>Монтаж умного дома Aqara в Екатеринбурге и Свердловской области. Свет, безопасность, климат под ключ.</p></div><div><div class="footer__col-title">Услуги</div><div class="footer__links"><a href="#services">Умный свет</a><a href="#services">Умный дом под ключ</a><a href="#services">Безопасность</a></div></div><div><div class="footer__col-title">Контакты</div><div class="footer__links"><a href="tel:+79612021807">+7 (961) 202-18-07</a><a href="https://t.me/smartatmosfera">Telegram</a><a href="#quiz">Рассчитать стоимость</a></div></div></div><div class="footer__bottom"><span>© 2026 СмартАтмосфера. Екатеринбург.</span><span>Работаем по Екатеринбургу и Свердловской области</span></div></div></footer>
+<footer class="footer"><div class="container"><div class="footer__inner"><div class="footer__brand"><svg width="32" height="32" viewBox="0 0 36 36" fill="none"><rect width="36" height="36" rx="10" fill="var(--primary)"/><path d="M10 22 L18 11 L26 22" stroke="white" stroke-width="2.2" fill="none"/><circle cx="18" cy="25" r="2.5" fill="white"/></svg><span>СмартАтмосфера</span><p>Монтаж умного дома Aqara в Екатеринбурге и Свердловской области. Свет, безопасность, климат под ключ.</p></div><div><div class="footer__col-title">Услуги</div><div class="footer__links"><a href="#services">Умный свет</a><a href="#services">Умный дом под ключ</a><a href="#services">Безопасность</a></div></div><div><div class="footer__col-title">Контакты</div><div class="footer__links"><a href="tel:+79612021807">+7 (961) 202-18-07</a><a href="#" onclick="openMessengerChoice(); return false;">Написать в мессенджер</a><a href="#quiz">Рассчитать стоимость</a></div></div></div><div class="footer__bottom"><span>© 2026 СмартАтмосфера. Екатеринбург.</span><span>Работаем по Екатеринбургу и Свердловской области</span></div></div></footer>
 
-<div class="sticky-cta"><button class="btn btn-primary" onclick="scrollToQuiz()">Рассчитать</button><a class="btn btn-ghost" href="tel:+79612021807">Позвонить</a><a class="btn btn-tg" href="https://t.me/smartatmosfera">TG</a></div>
+<div class="sticky-cta"><button class="btn btn-primary" onclick="scrollToQuiz()">Рассчитать</button><a class="btn btn-ghost" href="tel:+79612021807">Позвонить</a><button class="btn btn-tg" onclick="openMessengerChoice()">Написать</button></div>
 
-<!-- ПЛАВАЮЩИЙ ВИДЖЕТ — ПОЛУПРОЗРАЧНЫЙ, НЕ ИСЧЕЗАЕТ -->
+<!-- ПЛАВАЮЩИЙ ВИДЖЕТ — с выбором мессенджера -->
 <div class="floating-chat">
-  <button class="chat-button" onclick="window.open('https://t.me/smartatmosfera', '_blank')">
+  <button class="chat-button" onclick="openMessengerChoice()">
     <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z" fill="currentColor"/></svg>
     Готовы ответить на ваши вопросы?
   </button>
 </div>
 
-<script>
-// Клик по логотипу / названию — плавный скролл к началу
-document.getElementById('logoHome')?.addEventListener('click', function(e) {
-  e.preventDefault();
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-});
+<!-- МОДАЛЬНОЕ ОКНО ВЫБОРА МЕССЕНДЖЕРА -->
+<div id="messengerModal" class="modal-messenger">
+  <div class="messenger-card">
+    <h3>Выберите мессенджер</h3>
+    <p>Удобный способ связи — какой вам ближе?</p>
+    <div class="messenger-buttons">
+      <button class="btn-messenger-tg" id="chooseTelegramBtn">📱 Telegram</button>
+      <button class="btn-messenger-max" id="chooseMaxBtn">📲 MAX (VK Мессенджер)</button>
+    </div>
+    <button class="messenger-close" onclick="closeMessengerModal()">Отмена</button>
+  </div>
+</div>
 
+<script>
+// Переменная для хранения текста сообщения, который нужно отправить (если есть)
+let pendingMessage = null;
+
+// Функция открытия модалки с запоминанием текста
+function openMessengerChoice(messageText) {
+  pendingMessage = messageText || null;
+  document.getElementById('messengerModal').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+function closeMessengerModal() {
+  document.getElementById('messengerModal').classList.remove('active');
+  document.body.style.overflow = '';
+  pendingMessage = null;
+}
+// Обработчики выбора
+function sendToTelegram() {
+  let url = 'https://t.me/smartatmosfera';
+  if (pendingMessage) {
+    url += '?text=' + encodeURIComponent(pendingMessage);
+  }
+  window.open(url, '_blank');
+  closeMessengerModal();
+}
+function sendToMax() {
+  let maxUrl = 'https://max.ru/u/f9LHodD0cOJAXW9z-LvG2Q757f7ylS4VKXa3Wmqkb3le8VduWG04P-BU1pQ';
+  // MAX не поддерживает предзаполнение текста — просто открываем профиль
+  window.open(maxUrl, '_blank');
+  closeMessengerModal();
+}
+// Назначим обработчики после загрузки
+document.getElementById('chooseTelegramBtn').onclick = sendToTelegram;
+document.getElementById('chooseMaxBtn').onclick = sendToMax;
+
+// Функции sendQuiz и submitCta теперь используют модалку
+function sendQuiz(ch) {
+  let name = document.getElementById('qName').value.trim();
+  let phone = document.getElementById('qPhone').value.trim();
+  if(!name || !phone) { alert('Заполните имя и контакт'); return; }
+  let msg = '🏠 Заявка с сайта СмартАтмосфера (Екатеринбург)\n\nИмя: ' + name + '\nКонтакт: ' + phone + '\nРасчёт: ' + document.getElementById('qPrice').innerText + '\nУслуга: ' + (quizData.step1 || '') + '\nОбъект: ' + (quizData.step2 || '');
+  openMessengerChoice(msg);
+  document.getElementById('qResult').classList.remove('active');
+  document.getElementById('qSuccess').classList.add('active');
+}
+function callFromQuiz() {
+  let name = document.getElementById('qName').value.trim();
+  let phone = document.getElementById('qPhone').value.trim();
+  if(!name || !phone) { alert('Заполните имя и контакт'); return; }
+  window.location.href = 'tel:+79612021807';
+  document.getElementById('qResult').classList.remove('active');
+  document.getElementById('qSuccess').classList.add('active');
+}
+function submitCta(e) {
+  e.preventDefault();
+  let name = document.getElementById('ctaName').value.trim();
+  let phone = document.getElementById('ctaPhone').value.trim();
+  if(!name || !phone){ alert('Заполните имя и телефон'); return; }
+  let msg = '📩 Заявка с сайта СмартАтмосфера (Екатеринбург)\n\nИмя: ' + name + '\nТелефон: ' + phone + '\nСообщение: ' + document.getElementById('ctaMsg').value;
+  openMessengerChoice(msg);
+  document.getElementById('ctaSuccess').classList.add('show');
+  document.getElementById('ctaForm').querySelector('button').disabled = true;
+}
+
+// Логика калькулятора (исправлена)
 let quizData = {};
-function selectOpt(btn){ let step=btn.getAttribute('data-step'); let val=btn.getAttribute('data-val'); quizData['step'+step]=val; document.querySelectorAll(`[data-step="${step}"]`).forEach(b=>b.classList.remove('selected')); btn.classList.add('selected'); }
-function showStep(n){ for(let i=1;i<=4;i++){ let s=document.getElementById('qs'+i); if(s) s.classList.toggle('active', i===n); } document.getElementById('quizBar').style.width=(n/4)*100+'%'; }
-function nextStep(n){ showStep(n); }
-function prevStep(n){ showStep(n); }
-function calcResult(){ let svc=quizData.step1||'Умный свет (выключатели)'; let room=quizData.step2||'1-комн. квартира'; let wire=quizData.step3||'Рабочая'; let prices={'Умный свет (выключатели)':12000,'Безопасность и датчики':18000,'Климат и шторы':22000,'Всё под ключ':45000}; let base=prices[svc]||12000; let roomM={'1-комн. квартира':1,'2-3-комн. квартира':1.6,'Частный дом':2.5}; let wireM={'Новостройка':1,'Рабочая':1.1,'Старая':1.4}; let total=Math.round(base*(roomM[room]||1)*(wireM[wire]||1)/1000)*1000; document.getElementById('qPrice').innerText='от '+total.toLocaleString('ru-RU')+' ₽'; document.querySelectorAll('.quiz__step').forEach(s=>s.classList.remove('active')); document.getElementById('qResult').classList.add('active'); document.getElementById('quizBar').style.width='100%'; }
-function sendQuiz(ch){ let name=document.getElementById('qName').value.trim(); let phone=document.getElementById('qPhone').value.trim(); if(!name||!phone){ alert('Заполните имя и контакт'); return; } let msg=encodeURIComponent('🏠 Заявка с сайта СмартАтмосфера (Екатеринбург)\n\nИмя: '+name+'\nКонтакт: '+phone+'\nРасчёт: '+document.getElementById('qPrice').innerText+'\nУслуга: '+(quizData.step1||'')+'\nОбъект: '+(quizData.step2||'')); window.open('https://t.me/smartatmosfera?text='+msg,'_blank'); document.getElementById('qResult').classList.remove('active'); document.getElementById('qSuccess').classList.add('active'); }
+function selectOpt(btn){ 
+  let step = btn.getAttribute('data-step'); 
+  let val = btn.getAttribute('data-val'); 
+  quizData['step'+step] = val; 
+  document.querySelectorAll(`[data-step="${step}"]`).forEach(b=>b.classList.remove('selected')); 
+  btn.classList.add('selected'); 
+}
+function showStep(n){ 
+  for(let i=1;i<=4;i++){ 
+    let s=document.getElementById('qs'+i); 
+    if(s) s.classList.toggle('active', i===n); 
+  } 
+  document.getElementById('quizBar').style.width=(n/4)*100+'%'; 
+}
+function nextStep(n){ 
+  if(n && n>=2 && n<=4) showStep(n); 
+}
+function prevStep(n){ 
+  if(n && n>=1 && n<=3) showStep(n); 
+}
+function calcResult(){ 
+  let svc=quizData.step1||'Умный свет (выключатели)'; 
+  let room=quizData.step2||'1-комн. квартира'; 
+  let wire=quizData.step3||'Рабочая'; 
+  let prices={'Умный свет (выключатели)':12000,'Безопасность и датчики':18000,'Климат и шторы':22000,'Всё под ключ':45000}; 
+  let base=prices[svc]||12000; 
+  let roomM={'1-комн. квартира':1,'2-3-комн. квартира':1.6,'Частный дом':2.5}; 
+  let wireM={'Новостройка':1,'Рабочая':1.1,'Старая':1.4}; 
+  let total=Math.round(base*(roomM[room]||1)*(wireM[wire]||1)/1000)*1000; 
+  document.getElementById('qPrice').innerText='от '+total.toLocaleString('ru-RU')+' ₽'; 
+  document.querySelectorAll('.quiz__step').forEach(s=>s.classList.remove('active')); 
+  document.getElementById('qResult').classList.add('active'); 
+  document.getElementById('quizBar').style.width='100%'; 
+}
 function scrollToQuiz(){ document.getElementById('quiz').scrollIntoView({behavior:'smooth'}); }
-function submitCta(e){ e.preventDefault(); let name=document.getElementById('ctaName').value.trim(); let phone=document.getElementById('ctaPhone').value.trim(); if(!name||!phone){ alert('Заполните имя и телефон'); return; } let msg=encodeURIComponent('📩 Заявка с сайта СмартАтмосфера (Екатеринбург)\n\nИмя: '+name+'\nТелефон: '+phone+'\nСообщение: '+document.getElementById('ctaMsg').value); window.open('https://t.me/smartatmosfera?text='+msg,'_blank'); document.getElementById('ctaSuccess').classList.add('show'); document.getElementById('ctaForm').querySelector('button').disabled=true; }
 function toggleFaq(btn){ let item=btn.closest('.faq-item'); let isOpen=item.classList.contains('open'); document.querySelectorAll('.faq-item.open').forEach(i=>{i.classList.remove('open'); i.querySelector('button').setAttribute('aria-expanded','false');}); if(!isOpen){ item.classList.add('open'); btn.setAttribute('aria-expanded','true'); } }
 document.querySelectorAll('.filter-chip').forEach(chip=>{ chip.addEventListener('click',function(){ let filter=this.dataset.filter; document.querySelectorAll('.filter-chip').forEach(c=>c.classList.remove('active')); this.classList.add('active'); document.querySelectorAll('.solution-card').forEach(card=>{ if(filter==='all'||card.dataset.category===filter) card.classList.remove('hide'); else card.classList.add('hide'); }); }); });
 let burger=document.getElementById('burgerBtn'), mob=document.getElementById('mobMenu'); function closeMob(){ mob.classList.remove('open'); } if(burger) burger.onclick=()=>mob.classList.toggle('open'); document.querySelectorAll('.mob-menu a').forEach(a=>a.addEventListener('click',closeMob));
 let themeBtn=document.querySelector('[data-theme-toggle]'); if(themeBtn){ let root=document.documentElement; let curr=root.getAttribute('data-theme')||'dark'; themeBtn.onclick=()=>{ let newTheme=curr==='dark'?'light':'dark'; root.setAttribute('data-theme',newTheme); curr=newTheme; themeBtn.innerText=newTheme==='dark'?'🌙':'☀️'; }; }
 let observer=new IntersectionObserver(e=>e.forEach(entry=>{if(entry.isIntersecting)entry.target.classList.add('visible');}),{threshold:0.1}); document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+document.getElementById('logoHome')?.addEventListener('click', function(e){ e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); });
 </script>
 </body>
 </html>
