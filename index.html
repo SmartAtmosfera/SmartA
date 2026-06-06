@@ -2,7 +2,7 @@
 <html data-theme="dark" lang="ru">
 <head>
 <meta charset="utf-8">
-<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport">
 <title>Умный дом под ключ в Тюмени — управляйте с телефона, голоса или сценариев</title>
 <link rel="icon" href="favicon.png" type="image/png">
 <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
@@ -11,17 +11,17 @@
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300..800&amp;family=Instrument+Serif:ital@0;1&amp;display=swap" rel="stylesheet">
 <style>
-/* ─── TOKENS (ОРИГИНАЛЬНЫЕ СТИЛИ) ─── */
+/* ─── ТОКЕНЫ И СБРОС ─── */
 :root {
   --font-display: 'Instrument Serif', Georgia, serif;
   --font-body: 'Manrope', 'Helvetica Neue', sans-serif;
-  --text-xs:   clamp(0.75rem,  0.7rem  + 0.25vw, 0.875rem);
-  --text-sm:   clamp(0.875rem, 0.8rem  + 0.35vw, 1rem);
-  --text-base: clamp(1rem,     0.95rem + 0.25vw, 1.125rem);
-  --text-lg:   clamp(1.125rem, 1rem    + 0.75vw, 1.5rem);
-  --text-xl:   clamp(1.5rem,   1.2rem  + 1.25vw, 2.25rem);
-  --text-2xl:  clamp(2rem,     1.2rem  + 2.5vw,  3.5rem);
-  --text-3xl:  clamp(2.5rem,   1rem    + 4vw,    5rem);
+  --text-xs:   clamp(0.7rem, 0.65rem + 0.25vw, 0.85rem);
+  --text-sm:   clamp(0.85rem, 0.8rem + 0.35vw, 1rem);
+  --text-base: clamp(1rem,   0.95rem + 0.25vw, 1.125rem);
+  --text-lg:   clamp(1.125rem, 1rem + 0.75vw, 1.5rem);
+  --text-xl:   clamp(1.5rem,   1.2rem + 1.25vw, 2.25rem);
+  --text-2xl:  clamp(2rem,     1.2rem + 2.5vw,  3.5rem);
+  --text-3xl:  clamp(2.5rem,   1rem + 4vw,      5rem);
   --space-1: .25rem; --space-2: .5rem; --space-3: .75rem; --space-4: 1rem;
   --space-5: 1.25rem; --space-6: 1.5rem; --space-8: 2rem; --space-10: 2.5rem;
   --space-12: 3rem; --space-16: 4rem; --space-20: 5rem; --space-24: 6rem;
@@ -64,11 +64,12 @@
 }}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;scroll-padding-top:80px;-webkit-font-smoothing:antialiased}
-body{min-height:100dvh;font-family:var(--font-body);font-size:var(--text-base);color:var(--text);background:var(--bg);line-height:1.65;overflow-x:hidden}
+body{min-height:100dvh;font-family:var(--font-body);font-size:var(--text-base);color:var(--text);background:var(--bg);line-height:1.65;overflow-x:hidden;transition:background 0.2s, color 0.2s}
+body.menu-open{overflow:hidden}
 img{display:block;max-width:100%;height:auto}
 ul[role=list],ol[role=list]{list-style:none}
 input,button,textarea,select{font:inherit;color:inherit}
-h1,h2,h3,h4{text-wrap:balance;line-height:1.15}
+h1,h2,h3,h4{text-wrap:balance;line-height:1.25}
 p,li{text-wrap:pretty;max-width:68ch}
 button{cursor:pointer;background:none;border:none}
 a{color:inherit;text-decoration:none}
@@ -77,17 +78,23 @@ a{color:inherit;text-decoration:none}
 .display{font-family:var(--font-display);font-style:italic}
 .container{max-width:var(--content-wide);margin-inline:auto;padding-inline:clamp(var(--space-4),4vw,var(--space-12))}
 .container--narrow{max-width:var(--content-default);margin-inline:auto;padding-inline:clamp(var(--space-4),4vw,var(--space-12))}
-.btn{display:inline-flex;align-items:center;gap:var(--space-2);padding:var(--space-3) var(--space-6);border-radius:var(--radius-lg);font-size:var(--text-sm);font-weight:600;transition:all var(--transition);white-space:nowrap}
-.btn:active{transform:scale(.97)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:var(--space-2);padding:var(--space-3) var(--space-6);border-radius:var(--radius-lg);font-size:var(--text-sm);font-weight:600;transition:all var(--transition);white-space:nowrap}
+.btn:active{transform:scale(0.97)}
 .btn-primary{background:var(--primary);color:var(--text-inv)}
-.btn-primary:hover{background:var(--primary-h)}
+.btn-primary:hover{background:var(--primary-h);transform:translateY(-2px)}
 .btn-ghost{border:1.5px solid var(--border);color:var(--text)}
-.btn-ghost:hover{border-color:var(--primary);color:var(--primary)}
+.btn-ghost:hover{border-color:var(--primary);color:var(--primary);transform:translateY(-2px)}
 .btn-lg{padding:var(--space-4) var(--space-8);font-size:var(--text-base);border-radius:var(--radius-xl)}
 .btn-tg{background:#229ED9;color:#fff}
 .btn-tg:hover{background:#1a8abf}
 .btn-max{background:#1e6f5c;color:#fff}
 .btn-max:hover{background:#0f5a48}
+/* Кнопка наверх */
+.scroll-top{position:fixed;bottom:24px;right:24px;width:48px;height:48px;border-radius:var(--radius-full);background:var(--primary);color:var(--text-inv);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:opacity 0.3s, visibility 0.3s, background 0.2s;z-index:100;box-shadow:var(--shadow-md);font-size:28px;line-height:1}
+.scroll-top.visible{opacity:1;visibility:visible}
+.scroll-top:hover{background:var(--primary-h);transform:translateY(-3px)}
+@media(max-width:600px){.scroll-top{bottom:80px;right:16px}}
+/* Остальные стили (без изменений, но с унификацией радиусов) */
 .skip-link{position:fixed;top:-100px;left:var(--space-2);z-index:9999;padding:var(--space-2) var(--space-4);background:var(--primary);color:var(--text-inv);border-radius:var(--radius-md);font-size:var(--text-sm);font-weight:600;transition:top .15s}
 .skip-link:focus{top:var(--space-2)}
 .nav{position:fixed;top:0;left:0;right:0;z-index:100;height:68px;display:flex;align-items:center;background:color-mix(in oklch,var(--bg) 85%,transparent);backdrop-filter:blur(16px);border-bottom:1px solid oklch(from var(--text) l c h/.07)}
@@ -110,144 +117,47 @@ a{color:inherit;text-decoration:none}
 .mob-menu a{font-size:var(--text-lg);font-weight:600;color:var(--text);padding:var(--space-3) 0;border-bottom:1px solid var(--divider)}
 .mob-menu a:hover{color:var(--primary)}
 @media(max-width:768px){.nav__links{display:none}.burger{display:flex}.nav__phone{display:none}}
-/* ПЛАВАЮЩИЙ ВИДЖЕТ — ПОЛУПРОЗРАЧНЫЙ */
-.floating-chat {
-  position: fixed;
-  bottom: 24px;
-  right: 24px;
-  z-index: 1000;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 12px;
-}
-.chat-button {
-  background: rgba(42, 181, 160, 0.6);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255,255,255,0.2);
-  border-radius: 60px;
-  padding: 12px 20px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  color: white;
-  font-weight: 600;
-  font-size: var(--text-sm);
-  cursor: pointer;
-  transition: all 0.2s ease;
-  box-shadow: 0 4px 14px rgba(0,0,0,0.15);
-}
-.chat-button:hover {
-  background: rgba(42, 181, 160, 0.9);
-  transform: scale(1.02);
-  border-color: rgba(255,255,255,0.4);
-}
-.chat-button svg {
-  width: 20px;
-  height: 20px;
-  fill: white;
-}
-@media (max-width: 600px) {
-  .floating-chat { bottom: 80px; right: 16px; }
-  .chat-button { padding: 10px 16px; font-size: 12px; }
-}
-/* МОДАЛКА ВЫБОРА МЕССЕНДЖЕРА */
-.modal-messenger {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.7);
-  backdrop-filter: blur(6px);
-  z-index: 10000;
-  align-items: center;
-  justify-content: center;
-}
-.modal-messenger.active {
-  display: flex;
-}
-.messenger-card {
-  background: var(--surface);
-  border-radius: var(--radius-2xl);
-  padding: 2rem;
-  max-width: 320px;
-  width: 90%;
-  text-align: center;
-  box-shadow: var(--shadow-lg);
-  border: 1px solid var(--border);
-}
-.messenger-card h3 {
-  font-family: var(--font-display);
-  font-size: var(--text-xl);
-  margin-bottom: 1rem;
-}
-.messenger-card p {
-  margin-bottom: 1.5rem;
-  font-size: var(--text-sm);
-  color: var(--text-muted);
-}
-.messenger-buttons {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-.messenger-buttons button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  padding: 12px;
-  border-radius: var(--radius-lg);
-  font-weight: 600;
-  transition: all 0.2s;
-  width: 100%;
-}
-.btn-messenger-tg {
-  background: #229ED9;
-  color: white;
-}
-.btn-messenger-max {
-  background: #1e6f5c;
-  color: white;
-}
-.btn-messenger-tg:hover, .btn-messenger-max:hover {
-  filter: brightness(1.05);
-  transform: translateY(-2px);
-}
-.messenger-close {
-  margin-top: 16px;
-  background: transparent;
-  border: none;
-  color: var(--text-muted);
-  font-size: var(--text-sm);
-  cursor: pointer;
-  text-decoration: underline;
-}
-/* Улучшенные стили для hero */
+.floating-chat{position:fixed;bottom:24px;right:24px;z-index:1000;display:flex;flex-direction:column;align-items:flex-end;gap:12px}
+.chat-button{background:rgba(42,181,160,0.6);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.2);border-radius:60px;padding:12px 20px;display:flex;align-items:center;gap:10px;color:white;font-weight:600;font-size:var(--text-sm);cursor:pointer;transition:all 0.2s ease;box-shadow:0 4px 14px rgba(0,0,0,0.15)}
+.chat-button:hover{background:rgba(42,181,160,0.9);transform:scale(1.02);border-color:rgba(255,255,255,0.4)}
+.chat-button svg{width:20px;height:20px;fill:white}
+@media(max-width:600px){.floating-chat{bottom:90px;right:16px}.chat-button{padding:10px 16px;font-size:12px}}
+.modal-messenger{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);backdrop-filter:blur(6px);z-index:10000;align-items:center;justify-content:center}
+.modal-messenger.active{display:flex}
+.messenger-card{background:var(--surface);border-radius:var(--radius-2xl);padding:2rem;max-width:320px;width:90%;text-align:center;box-shadow:var(--shadow-lg);border:1px solid var(--border)}
+.messenger-card h3{font-family:var(--font-display);font-size:var(--text-xl);margin-bottom:1rem}
+.messenger-card p{margin-bottom:1.5rem;font-size:var(--text-sm);color:var(--text-muted)}
+.messenger-buttons{display:flex;flex-direction:column;gap:12px}
+.messenger-buttons button{display:flex;align-items:center;justify-content:center;gap:10px;padding:12px;border-radius:var(--radius-lg);font-weight:600;transition:all 0.2s;width:100%}
+.btn-messenger-tg{background:#229ED9;color:white}
+.btn-messenger-max{background:#1e6f5c;color:white}
+.btn-messenger-tg:hover,.btn-messenger-max:hover{filter:brightness(1.05);transform:translateY(-2px)}
+.messenger-close{margin-top:16px;background:transparent;border:none;color:var(--text-muted);font-size:var(--text-sm);cursor:pointer;text-decoration:underline}
+/* Hero — фон с изображением */
 .hero{position:relative;min-height:100svh;display:flex;align-items:center;padding-top:68px;overflow:clip}
 .hero__bg{position:absolute;inset:0;z-index:0}
 .hero__bg img{width:100%;height:100%;object-fit:cover;object-position:center}
-.hero__overlay{position:absolute;inset:0;background:linear-gradient(135deg,oklch(0.1 0.03 165/.92) 0%,oklch(0.12 0.02 150/.75) 50%,oklch(0.08 0.01 180/.6) 100%)}
+.hero__overlay{position:absolute;inset:0;background:linear-gradient(135deg,oklch(0.08 0.04 165/.85) 0%,oklch(0.1 0.03 150/.7) 100%)}
 .hero__content{position:relative;z-index:1;padding-block:clamp(var(--space-16),8vw,var(--space-24));max-width:var(--content-wide);margin-inline:auto;padding-inline:clamp(var(--space-4),4vw,var(--space-12));width:100%}
 .hero__eyebrow{display:inline-flex;align-items:center;gap:var(--space-2);background:color-mix(in oklch,var(--primary) 15%,transparent);border:1px solid color-mix(in oklch,var(--primary) 30%,transparent);color:var(--primary);padding:var(--space-1) var(--space-3);border-radius:var(--radius-full);font-size:var(--text-xs);font-weight:600;letter-spacing:.06em;text-transform:uppercase;margin-bottom:var(--space-6)}
-.hero__title{font-family:var(--font-display);font-size:clamp(2.8rem, 5vw + 1rem, 5.2rem);font-weight:400;color:#fff;line-height:1.2;margin-bottom:var(--space-6);max-width:100%;word-break:break-word}
-.hero__title em{font-style:italic;color:color-mix(in oklch,var(--primary) 80%,white)}
-.hero__desc{font-size:clamp(var(--text-lg), 2vw, 1.8rem);color:rgba(255,255,255,.85);max-width:60ch;margin-bottom:var(--space-10);line-height:1.4}
+.hero__title{font-family:var(--font-display);font-size:clamp(2.5rem, 6vw, 5rem);font-weight:400;color:#fff;line-height:1.2;margin-bottom:var(--space-6);word-break:break-word}
+.hero__desc{font-size:clamp(1rem, 2vw, 1.5rem);color:rgba(255,255,255,.9);max-width:60ch;margin-bottom:var(--space-10);line-height:1.4}
 .hero__cta{display:flex;flex-wrap:wrap;gap:var(--space-4);align-items:center}
 .hero__packages{display:flex;flex-wrap:wrap;gap:var(--space-4);margin-top:var(--space-12);padding-top:var(--space-8);border-top:1px solid rgba(255,255,255,.2)}
-.package-badge{background:rgba(255,255,255,.08);backdrop-filter:blur(8px);border-radius:var(--radius-xl);padding:var(--space-3) var(--space-5);text-align:center;min-width:140px}
+.package-badge{background:rgba(0,0,0,0.55);backdrop-filter:blur(8px);border-radius:var(--radius-xl);padding:var(--space-3) var(--space-5);text-align:center;min-width:140px;border:1px solid rgba(255,255,255,0.2)}
 .package-badge__price{font-size:var(--text-xl);font-weight:800;color:#fff;line-height:1.2}
-.package-badge__label{font-size:var(--text-xs);color:rgba(255,255,255,.7)}
+.package-badge__label{font-size:var(--text-xs);color:rgba(255,255,255,.85)}
 @media(max-width:600px){.hero__packages{flex-direction:column;align-items:stretch}}
-/* остальные стили без изменений */
+/* Секции, карточки – унифицированные радиусы */
 .section-label{font-size:var(--text-xs);font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--primary);margin-bottom:var(--space-3)}
-.section-title{font-family:var(--font-display);font-size:var(--text-2xl);font-weight:400;margin-bottom:var(--space-4);line-height:1.1}
+.section-title{font-family:var(--font-display);font-size:var(--text-2xl);font-weight:400;margin-bottom:var(--space-4);line-height:1.2}
 .section-title em{font-style:italic;color:var(--primary)}
 .section-desc{color:var(--text-muted);font-size:var(--text-base);max-width:55ch;line-height:1.7}
 .services{padding-block:clamp(var(--space-16),8vw,var(--space-24));background:var(--surface)}
 .services__header{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-12);align-items:end;margin-bottom:var(--space-12)}
 .services__grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(320px,100%),1fr));gap:var(--space-6)}
-.svc-card{background:var(--surface-2);border:1px solid oklch(from var(--text) l c h/.06);border-radius:var(--radius-2xl);padding:var(--space-8);transition:box-shadow var(--transition),transform var(--transition);position:relative;overflow:hidden}
-.svc-card:hover{box-shadow:var(--shadow-lg);transform:translateY(-4px)}
+.svc-card{background:var(--surface-2);border:1px solid oklch(from var(--text) l c h/.06);border-radius:var(--radius-2xl);padding:var(--space-8);transition:transform 0.25s ease, box-shadow 0.25s ease;position:relative;overflow:hidden}
+.svc-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg)}
 .svc-card__num{font-family:var(--font-display);font-size:clamp(3rem,2rem + 2vw,5rem);font-weight:400;color:var(--primary-hl);line-height:1;margin-bottom:var(--space-4);font-style:italic}
 .svc-card__title{font-size:var(--text-lg);font-weight:700;margin-bottom:var(--space-3)}
 .svc-card__desc{color:var(--text-muted);font-size:var(--text-sm);line-height:1.7}
@@ -258,7 +168,7 @@ a{color:inherit;text-decoration:none}
 @media(max-width:768px){.services__header{grid-template-columns:1fr}}
 .process{padding-block:clamp(var(--space-16),8vw,var(--space-24));background:var(--bg)}
 .process__inner{display:grid;grid-template-columns:1fr 1fr;gap:clamp(var(--space-12),6vw,var(--space-24));align-items:start}
-.process__photo{border-radius:var(--radius-2xl);overflow:hidden;box-shadow:var(--shadow-lg);aspect-ratio:4/5;position:relative}
+.process__photo{border-radius:var(--radius-2xl);overflow:hidden;box-shadow:var(--shadow-lg);aspect-ratio:4/5}
 .process__photo img{width:100%;height:100%;object-fit:cover}
 .process__steps{display:flex;flex-direction:column;gap:var(--space-2)}
 .step{display:grid;grid-template-columns:48px 1fr;gap:var(--space-4);padding:var(--space-5) 0;border-bottom:1px solid var(--divider);transition:transform var(--transition)}
@@ -266,7 +176,6 @@ a{color:inherit;text-decoration:none}
 .step:last-child{border-bottom:none}
 .step__num{width:48px;height:48px;border-radius:var(--radius-full);background:var(--primary-hl);color:var(--primary);font-weight:800;font-size:var(--text-lg);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
 .step__title{font-weight:700;font-size:var(--text-base);margin-bottom:var(--space-1);display:flex;align-items:center;gap:8px}
-.step__title span{font-size:var(--text-lg);}
 .step__desc{color:var(--text-muted);font-size:var(--text-sm);line-height:1.65}
 .process__trust{display:flex;flex-wrap:wrap;gap:var(--space-4);margin-top:var(--space-8);padding-top:var(--space-6);border-top:1px solid var(--divider)}
 .trust-badge{flex:1;text-align:center;padding:var(--space-2)}
@@ -285,12 +194,13 @@ a{color:inherit;text-decoration:none}
 .stat-item__label{font-size:var(--text-xs);color:var(--text-muted)}
 @media(max-width:768px){.owner__inner{grid-template-columns:1fr}.owner__img{max-width:300px;margin:0 auto}}
 .advantages{padding-block:clamp(var(--space-16),8vw,var(--space-24));background:var(--bg)}
-.advantages__grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:var(--space-6);margin-top:var(--space-12)}
-.advantage-card{background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-2xl);padding:var(--space-8);text-align:center;transition:transform var(--transition)}
-.advantage-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-md)}
-.advantage-icon{font-size:48px;margin-bottom:var(--space-4);display:inline-block}
+.advantages__grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:var(--space-6);margin-top:var(--space-12)}
+.advantage-card{background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-2xl);padding:var(--space-8);text-align:center;transition:transform 0.25s ease, box-shadow 0.25s ease}
+.advantage-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-md)}
+.advantage-icon svg{width:40px;height:40px;margin-bottom:var(--space-4);color:var(--primary);display:inline-block}
 .advantage-title{font-size:var(--text-lg);font-weight:700;margin-bottom:var(--space-2)}
 .advantage-desc{color:var(--text-muted);font-size:var(--text-sm);line-height:1.65}
+/* Остальные блоки */
 .quiz{padding-block:clamp(var(--space-16),8vw,var(--space-24));background:var(--bg)}
 .quiz__wrapper{max-width:680px;margin-inline:auto}
 .quiz__card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-2xl);padding:clamp(var(--space-8),4vw,var(--space-12));box-shadow:var(--shadow-md)}
@@ -311,8 +221,6 @@ a{color:inherit;text-decoration:none}
 .quiz__contact-form{display:flex;flex-direction:column;gap:var(--space-4);width:100%;max-width:400px}
 .quiz__input{background:var(--surface-2);border:1.5px solid var(--border);border-radius:var(--radius-lg);padding:var(--space-3) var(--space-4);font-size:var(--text-base);width:100%;outline:none;transition:border-color var(--transition)}
 .quiz__input:focus{border-color:var(--primary)}
-.quiz__send-group{display:flex;flex-direction:column;gap:var(--space-3)}
-.quiz__send-label{font-size:var(--text-sm);color:var(--text-muted);text-align:center}
 .quiz__send-btns{display:flex;gap:var(--space-3);justify-content:center;flex-wrap:wrap}
 .quiz__success{display:none;flex-direction:column;align-items:center;gap:var(--space-4);padding:var(--space-8) 0;text-align:center}
 .quiz__success.active{display:flex}
@@ -322,16 +230,13 @@ a{color:inherit;text-decoration:none}
 .reviews__rating-summary{display:flex;align-items:center;gap:var(--space-4);flex-wrap:wrap}
 .rating-stars-big{display:flex;gap:4px;color:#f5a623;font-size:var(--text-xl)}
 .rating-value{font-size:var(--text-2xl);font-weight:800;color:var(--text);font-family:var(--font-display)}
-.reviews__external{display:flex;gap:var(--space-3);align-items:center}
-.ext-link{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border:1px solid var(--border);border-radius:var(--radius-lg);font-size:var(--text-xs);transition:all var(--transition)}
-.ext-link:hover{background:var(--surface-2);border-color:var(--primary);color:var(--primary)}
 .reviews__track{display:flex;gap:var(--space-6);overflow-x:auto;padding-bottom:var(--space-4);scrollbar-width:thin;scrollbar-color:var(--divider) transparent;scroll-snap-type:x mandatory}
 .reviews__track::-webkit-scrollbar{height:6px}
 .reviews__track::-webkit-scrollbar-track{background:transparent}
 .reviews__track::-webkit-scrollbar-thumb{background:var(--divider);border-radius:var(--radius-full)}
 .scroll-hint{display:flex;justify-content:flex-end;margin-top:var(--space-2);font-size:var(--text-xs);color:var(--text-muted);gap:4px;align-items:center}
-.review-card{min-width:min(360px,85vw);background:var(--surface-2);border:1px solid oklch(from var(--text) l c h/.06);border-radius:var(--radius-2xl);padding:var(--space-8);flex-shrink:0;scroll-snap-align:start;transition:transform var(--transition)}
-.review-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-md)}
+.review-card{min-width:min(360px,85vw);background:var(--surface-2);border:1px solid oklch(from var(--text) l c h/.06);border-radius:var(--radius-2xl);padding:var(--space-8);flex-shrink:0;scroll-snap-align:start;transition:transform 0.25s ease, box-shadow 0.25s ease}
+.review-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-md)}
 .review-card__rating{display:flex;align-items:center;gap:8px;margin-bottom:var(--space-3)}
 .review-card__stars{display:flex;gap:4px;color:#f5a623;font-size:14px}
 .review-card__rating-value{font-weight:700;font-size:var(--text-sm);color:var(--text)}
@@ -348,10 +253,9 @@ a{color:inherit;text-decoration:none}
 .contact-link:hover{color:var(--primary)}
 .contact-link svg{color:var(--primary);flex-shrink:0}
 .cta-form{display:flex;flex-direction:column;gap:var(--space-4);min-width:280px}
-.cta-form input{background:var(--surface);border:1.5px solid var(--border);border-radius:var(--radius-lg);padding:var(--space-3) var(--space-4);font-size:var(--text-base);width:100%;outline:none;transition:border-color var(--transition)}
-.cta-form input:focus{border-color:var(--primary)}
-.cta-form textarea{background:var(--surface);border:1.5px solid var(--border);border-radius:var(--radius-lg);padding:var(--space-3) var(--space-4);font-size:var(--text-base);width:100%;outline:none;resize:vertical;min-height:100px;transition:border-color var(--transition)}
-.cta-form textarea:focus{border-color:var(--primary)}
+.cta-form input,.cta-form textarea{background:var(--surface);border:1.5px solid var(--border);border-radius:var(--radius-lg);padding:var(--space-3) var(--space-4);font-size:var(--text-base);width:100%;outline:none;transition:border-color var(--transition)}
+.cta-form input:focus,.cta-form textarea:focus{border-color:var(--primary)}
+.cta-form textarea{resize:vertical;min-height:100px}
 .cta-form__success{display:none;background:color-mix(in oklch,var(--primary) 12%,transparent);border:1px solid color-mix(in oklch,var(--primary) 25%,transparent);border-radius:var(--radius-lg);padding:var(--space-4);text-align:center;color:var(--primary);font-weight:600}
 .cta-form__success.show{display:block}
 @media(max-width:768px){.cta-section__inner{grid-template-columns:1fr}.cta-form{min-width:auto}}
@@ -376,28 +280,28 @@ a{color:inherit;text-decoration:none}
 .footer__bottom{margin-top:var(--space-8);padding-top:var(--space-6);border-top:1px solid var(--divider);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:var(--space-3)}
 .footer__copy{color:var(--text-faint);font-size:var(--text-xs)}
 @media(max-width:768px){.footer__inner{grid-template-columns:1fr}}
-.reveal{opacity:0;transform:translateY(24px);transition:opacity .65s cubic-bezier(0.16,1,0.3,1),transform .65s cubic-bezier(0.16,1,0.3,1)}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity 0.65s cubic-bezier(0.16,1,0.3,1),transform 0.65s cubic-bezier(0.16,1,0.3,1)}
 .reveal.visible{opacity:1;transform:none}
 @media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
 .sticky-cta{display:none;position:fixed;bottom:0;left:0;right:0;z-index:90;background:var(--surface);border-top:1px solid var(--divider);padding:var(--space-3) var(--space-4);gap:var(--space-3);align-items:center}
-@media(max-width:600px){.sticky-cta{display:flex}}
-.sticky-cta .btn{flex:1;justify-content:center;padding:var(--space-3) var(--space-4)}
-@media(max-width:600px){body{padding-bottom:72px}}
+@media(max-width:600px){.sticky-cta{display:flex} body{padding-bottom:72px}}
 .solutions{padding-block:clamp(var(--space-16),8vw,var(--space-24));background:var(--surface)}
 .filter-bar{display:flex;flex-wrap:wrap;gap:12px;margin:var(--space-8) 0 var(--space-6)}
 .filter-chip{display:inline-flex;padding:8px 16px;border:1px solid var(--border);background:var(--surface-2);border-radius:999px;font-size:13px;font-weight:700;cursor:pointer;transition:all var(--transition);color:var(--text)}
 .filter-chip.active{border-color:var(--primary);background:color-mix(in oklch,var(--primary) 15%,var(--surface-2));color:var(--primary)}
 .solutions-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(320px,100%),1fr));gap:24px;margin-top:24px}
-.solution-card{background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-2xl);padding:24px;transition:all var(--transition);position:relative;display:flex;flex-direction:column}
+.solution-card{background:var(--surface-2);border:1px solid var(--border);border-radius:var(--radius-2xl);padding:24px;transition:transform 0.25s ease, box-shadow 0.25s ease;position:relative;display:flex;flex-direction:column}
+.solution-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-md)}
 .solution-card.hide{display:none}
 .solution-badge{position:absolute;top:16px;right:16px;background:var(--accent);color:#fff;font-size:11px;font-weight:800;padding:4px 10px;border-radius:var(--radius-full);letter-spacing:.05em}
 .solution-badge.popular{background:var(--accent);}
 .solution-badge.best-value{background:var(--primary);}
-.solution-icon{font-size:36px;margin-bottom:12px}
+.solution-icon{font-size:36px;margin-bottom:12px;text-align:center}
 .solution-title{font-size:var(--text-lg);font-weight:700;margin-bottom:8px}
 .solution-price{font-size:var(--text-xl);font-weight:800;color:var(--accent);margin:12px 0 8px}
 .solution-meta{display:flex;gap:12px;font-size:var(--text-xs);color:var(--text-muted);margin-bottom:16px;flex-wrap:wrap}
-.meta-item{display:inline-flex;align-items:center;gap:4px}
+.meta-item{display:inline-flex;align-items:center;gap:6px}
+.meta-item svg{width:14px;height:14px;stroke:currentColor}
 .solution-features{list-style:none;margin:16px 0;padding:0;flex-grow:1}
 .solution-features li{padding-left:20px;position:relative;margin-bottom:8px;font-size:var(--text-sm);color:var(--text-muted)}
 .solution-features li::before{content:"•";position:absolute;left:0;color:var(--primary);font-weight:800}
@@ -449,37 +353,37 @@ a{color:inherit;text-decoration:none}
 <header class="nav"><div class="nav__inner"><div class="nav__logo" id="logoHome"><svg aria-label="СмартАтмосфера лого" fill="none" height="36" viewbox="0 0 36 36" width="36"><rect fill="var(--primary)" height="36" rx="10" width="36"></rect><path d="M10 22 L18 11 L26 22" fill="none" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2"></path><circle cx="18" cy="25" fill="white" r="2.5"></circle><circle cx="18" cy="11" fill="white" r="1.8"></circle></svg><div><div class="nav__logo-text">СмартАтмосфера</div><div class="nav__logo-sub">Умный дом · Тюмень</div></div></div><nav aria-label="Основная навигация" class="nav__links"><a href="#services">Услуги</a><a href="#solutions">Пакеты</a><a href="#process">Как работаем</a><a href="#devices">Оборудование</a><a href="#reviews">Отзывы</a><a href="#faq">FAQ</a></nav><div class="nav__actions"><a class="nav__phone" href="tel:+79612021807">+7 (961) 202-18-07</a><button aria-label="Переключить тему" class="theme-toggle" data-theme-toggle=""><svg fill="none" height="18" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="18"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></button><button aria-label="Меню" class="burger" id="burgerBtn"><svg fill="none" height="22" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24" width="22"><line x1="3" x2="21" y1="6" y2="6"></line><line x1="3" x2="21" y1="12" y2="12"></line><line x1="3" x2="21" y1="18" y2="18"></line></svg></button></div></div></header>
 <nav aria-label="Мобильное меню" class="mob-menu" id="mobMenu"><a href="#services" onclick="closeMob()">Услуги</a><a href="#solutions" onclick="closeMob()">Пакеты</a><a href="#process" onclick="closeMob()">Как работаем</a><a href="#devices" onclick="closeMob()">Устройства</a><a href="#reviews" onclick="closeMob()">Отзывы</a><a href="#faq" onclick="closeMob()">FAQ</a><a href="#quiz" onclick="closeMob()">Рассчитать стоимость</a><a href="tel:+79612021807" style="color:var(--primary)">+7 (961) 202-18-07</a></nav>
 <main id="main">
-<!-- HERO (добавлены кнопки Позвонить и Написать) -->
-<section aria-label="Главный экран" class="hero"><div aria-hidden="true" class="hero__bg"><img alt="" decoding="async" height="1080" src="https://user-gen-media-assets.s3.amazonaws.com/gemini_images/657a80bd-b939-42d3-8ab6-25760c3a5cc5.png" width="1920"/><div class="hero__overlay"></div></div><div class="container hero__content"><div class="hero__eyebrow"><svg fill="currentColor" height="12" viewbox="0 0 12 12" width="12"><circle cx="6" cy="6" r="6"></circle></svg>Тюмень и Тюменская область</div><h1 class="hero__title">Управляйте домом с телефона, голосом или по сценариям</h1><p class="hero__desc">Умный свет, климат, шторы, безопасность и защита от протечек воды — всё в одном приложении. Установим и настроим под ключ. Приедем в удобное для вас время.</p><div class="hero__cta"><button class="btn btn-primary btn-lg" onclick="scrollToQuiz()">Обсудить проект</button><button class="btn btn-ghost btn-lg" onclick="document.getElementById('process').scrollIntoView({behavior:'smooth'});">Как это работает</button><a class="btn btn-ghost btn-lg" href="tel:+79612021807" style="border-color: rgba(255,255,255,0.35); color:#fff;">📞 Позвонить</a><button class="btn btn-ghost btn-lg" onclick="openMessengerChoice()" style="border-color: rgba(255,255,255,0.35); color:#fff;">✉️ Написать</button></div><div style="margin-top: var(--space-8); font-size: var(--text-sm); color: rgba(255,255,255,0.8);">Подходит для квартиры, дома или дачи. Работает с Алисой и Siri.</div><div class="hero__packages"><div class="package-badge"><div class="package-badge__price">от 12 000 ₽</div><div class="package-badge__label">Умный свет</div></div><div class="package-badge"><div class="package-badge__price">от 18 000 ₽</div><div class="package-badge__label">Безопасность</div></div><div class="package-badge"><div class="package-badge__price">от 45 000 ₽</div><div class="package-badge__label">Под ключ</div></div></div></div></section>
+<!-- HERO — фон с изображением -->
+<section aria-label="Главный экран" class="hero"><div aria-hidden="true" class="hero__bg"><img alt="" decoding="async" height="1080" src="https://user-gen-media-assets.s3.amazonaws.com/gemini_images/657a80bd-b939-42d3-8ab6-25760c3a5cc5.png" width="1920"/></div><div class="hero__overlay"></div><div class="container hero__content"><div class="hero__eyebrow"><svg fill="currentColor" height="12" viewbox="0 0 12 12" width="12"><circle cx="6" cy="6" r="6"></circle></svg>Тюмень и Тюменская область</div><h1 class="hero__title">Управляйте домом с телефона, голосом или по сценариям</h1><p class="hero__desc">Умный свет, климат, шторы, безопасность и защита от протечек воды — всё в одном приложении. Установим и настроим под ключ. Приедем в удобное для вас время.</p><div class="hero__cta"><button class="btn btn-primary btn-lg" onclick="scrollToQuiz()">Обсудить проект</button><button class="btn btn-ghost btn-lg" onclick="document.getElementById('process').scrollIntoView({behavior:'smooth'});">Как это работает</button><a class="btn btn-ghost btn-lg" href="tel:+79612021807" style="border-color: rgba(255,255,255,0.35); color:#fff;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:4px"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>Позвонить</a><button class="btn btn-ghost btn-lg" onclick="openMessengerChoice()" style="border-color: rgba(255,255,255,0.35); color:#fff;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:4px"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Написать</button></div><div style="margin-top: var(--space-8); font-size: var(--text-sm); color: rgba(255,255,255,0.8);">Подходит для квартиры, дома или дачи. Работает с Алисой и Siri.</div><div class="hero__packages"><div class="package-badge"><div class="package-badge__price">от 12 000 ₽</div><div class="package-badge__label">Умный свет</div></div><div class="package-badge"><div class="package-badge__price">от 18 000 ₽</div><div class="package-badge__label">Безопасность</div></div><div class="package-badge"><div class="package-badge__price">от 45 000 ₽</div><div class="package-badge__label">Под ключ</div></div></div></div></section>
 
-<!-- SERVICES (без изменений) -->
+<!-- SERVICES -->
 <section class="services" id="services"><div class="container"><div class="services__header"><div><div class="section-label">Что мы делаем</div><h2 class="section-title">Монтаж <em>любой сложности</em></h2></div><p class="section-desc">От одного умного выключателя до полной автоматизации квартиры или загородного дома.</p></div><div class="services__grid"><article class="svc-card reveal"><div class="svc-card__num">01</div><h3 class="svc-card__title">Умный свет</h3><p class="svc-card__desc">Замена выключателей на Aqara, настройка сцен освещения, интеграция с Алисой и Siri. Без штробления стен.</p><div class="svc-card__price"><span class="svc-card__price-val">от 3 500 ₽</span><span class="svc-card__price-note">за точку</span></div></article><article class="svc-card svc-card--featured reveal"><div class="svc-card__num">02</div><h3 class="svc-card__title">Умный дом под ключ</h3><p class="svc-card__desc">Проектирование, поставка оборудования, монтаж и настройка всей системы: свет, климат, шторы, датчики безопасности, камеры.</p><div class="svc-card__price"><span class="svc-card__price-val">от 45 000 ₽</span><span class="svc-card__price-note">квартира от 50 м²</span></div></article><article class="svc-card reveal"><div class="svc-card__num">03</div><h3 class="svc-card__title">Климат и безопасность</h3><p class="svc-card__desc">Умные термостаты, датчики температуры и влажности, управление кондиционером, датчики открытия дверей и окон, сирены.</p><div class="svc-card__price"><span class="svc-card__price-val">от 12 000 ₽</span><span class="svc-card__price-note">комплект</span></div></article><article class="svc-card reveal"><div class="svc-card__num">04</div><h3 class="svc-card__title">Обслуживание и апгрейд</h3><p class="svc-card__desc">Обновление прошивок, расширение уже установленной системы, диагностика и ремонт. Приедем в удобное время.</p><div class="svc-card__price"><span class="svc-card__price-val">от 1 500 ₽</span><span class="svc-card__price-note">выезд</span></div></article></div></div></section>
 
-<!-- ПАКЕТЫ ПОД КЛЮЧ (без изменений) -->
+<!-- ПАКЕТЫ ПОД КЛЮЧ -->
 <section class="solutions" id="solutions"><div class="container"><div class="section-label">Пакеты под ключ</div><h2 class="section-title">Выберите <em>ваш идеальный вариант</em></h2><div class="filter-bar" id="filterBar"><button class="filter-chip active" data-filter="all">Все</button><button class="filter-chip" data-filter="light">💡 Свет</button><button class="filter-chip" data-filter="safety">🔒 Безопасность</button><button class="filter-chip" data-filter="climate">🌡️ Климат</button><button class="filter-chip" data-filter="full">🏠 Под ключ</button></div><div class="solutions-grid" id="solutionsGrid">
-  <div class="solution-card" data-category="light"><div class="solution-badge popular">🔥 Самый популярный</div><div class="solution-icon">💡</div><div class="solution-title">Умный свет</div><div class="solution-price">31 600 ₽</div><div class="solution-meta"><span class="meta-item">⏱️ 1 день</span><span class="meta-item">🛡️ 2 года гарантии</span><span class="meta-item">🚚 Бесплатный выезд</span></div><ul class="solution-features"><li>Сцены «Вечер», «Кино», «Ушли»</li><li>Автосвет в прихожей и коридоре</li><li>Управление из приложения и голосом</li><li>Hub M2 + 5 выключателей H1 + датчик движения</li></ul><button class="btn btn-primary solution-btn" onclick="scrollToQuiz()">Заказать →</button><div class="solution-utp"><span>✅ Работает без интернета</span><span>🎤 Алиса / Siri</span></div></div>
-  <div class="solution-card" data-category="safety"><div class="solution-icon">💧</div><div class="solution-title">Защита от протечки</div><div class="solution-price">43 900 ₽</div><div class="solution-meta"><span class="meta-item">⏱️ 1 день</span><span class="meta-item">🛡️ 2 года гарантии</span><span class="meta-item">🚚 Бесплатный выезд</span></div><ul class="solution-features"><li>Контроль мокрых зон в квартире или доме</li><li>Автоматическое перекрытие воды</li><li>Уведомление в телефон</li><li>Hub M2 + 4 датчика протечки T1 + 2 привода крана T1</li></ul><button class="btn btn-primary solution-btn" onclick="scrollToQuiz()">Заказать →</button><div class="solution-utp"><span>✅ Работает без интернета</span><span>💧 Защита от потопа</span></div></div>
-  <div class="solution-card" data-category="safety"><div class="solution-badge best-value">⭐ Выгодный старт</div><div class="solution-icon">🔐</div><div class="solution-title">Умный замок N100</div><div class="solution-price">41 700 ₽</div><div class="solution-meta"><span class="meta-item">⏱️ 1 день</span><span class="meta-item">🛡️ 2 года гарантии</span><span class="meta-item">🚚 Бесплатный выезд</span></div><ul class="solution-features"><li>Отпечаток, код, карта, смартфон</li><li>Временные коды для гостей</li><li>История входов в приложении</li><li>Hub M2 + умный замок Aqara N100</li></ul><button class="btn btn-primary solution-btn" onclick="scrollToQuiz()">Заказать →</button><div class="solution-utp"><span>✅ Работает без интернета</span><span>🔑 Забудьте о ключах</span></div></div>
-  <div class="solution-card" data-category="climate"><div class="solution-icon">❄️</div><div class="solution-title">Умное отопление</div><div class="solution-price">51 400 ₽</div><div class="solution-meta"><span class="meta-item">⏱️ 1-2 дня</span><span class="meta-item">🛡️ 2 года гарантии</span><span class="meta-item">🚚 Бесплатный выезд</span></div><ul class="solution-features"><li>Отдельная температура в разных комнатах</li><li>Экономичный режим в ваше отсутствие</li><li>Управление с телефона и голосом</li><li>Hub M2 + 6 термоголовок E1 + 3 датчика климата</li></ul><button class="btn btn-primary solution-btn" onclick="scrollToQuiz()">Заказать →</button><div class="solution-utp"><span>✅ Работает без интернета</span><span>🌡️ Экономия на отоплении</span></div></div>
-  <div class="solution-card" data-category="full"><div class="solution-badge best-value">⭐ Выгодный старт</div><div class="solution-icon">🏠</div><div class="solution-title">Стартовый умный дом</div><div class="solution-price">46 200 ₽</div><div class="solution-meta"><span class="meta-item">⏱️ 1-2 дня</span><span class="meta-item">🛡️ 2 года гарантии</span><span class="meta-item">🚚 Бесплатный выезд</span></div><ul class="solution-features"><li>Сразу закрывает основные бытовые задачи</li><li>Даёт понятный эффект с первого дня</li><li>Не перегружает бюджет, легко расширяется</li><li>Hub M2 + 4 выключателя H1 + 3 датчика открытия + 2 датчика движения + 2 датчика протечки</li></ul><button class="btn btn-primary solution-btn" onclick="scrollToQuiz()">Заказать →</button><div class="solution-utp"><span>✅ Работает без интернета</span><span>🎤 Алиса / Siri</span></div></div>
-  <div class="solution-card" data-category="full"><div class="solution-icon">🏡</div><div class="solution-title">Умная дача / дом</div><div class="solution-price">51 200 ₽</div><div class="solution-meta"><span class="meta-item">⏱️ 2 дня</span><span class="meta-item">🛡️ 2 года гарантии</span><span class="meta-item">🚚 Бесплатный выезд</span></div><ul class="solution-features"><li>Удалённый контроль: двери, окна, движение, температура, протечки, дым</li><li>Работает локально без интернета</li><li>Подходит для дома, который не под ежедневным присмотром</li><li>Hub M3 + полный набор датчиков</li></ul><button class="btn btn-primary solution-btn" onclick="scrollToQuiz()">Заказать →</button><div class="solution-utp"><span>✅ Работает без интернета</span><span>📡 Удалённый контроль</span></div></div>
-  <div class="solution-card" data-category="full"><div class="solution-icon">🛋️</div><div class="solution-title">Умные шторы</div><div class="solution-price">32 800 ₽</div><div class="solution-meta"><span class="meta-item">⏱️ 1 день</span><span class="meta-item">🛡️ 2 года гарантии</span><span class="meta-item">🚚 Бесплатный выезд</span></div><ul class="solution-features"><li>Открытие по времени и сценариям</li><li>Голосовое управление через Алису</li><li>Подходит для спальни и гостиной</li><li>Hub M2 + 2 мотора Curtain Driver E1</li></ul><button class="btn btn-primary solution-btn" onclick="scrollToQuiz()">Заказать →</button><div class="solution-utp"><span>✅ Работает без интернета</span><span>🎤 Алиса / Siri</span></div></div>
+  <div class="solution-card" data-category="light"><div class="solution-badge popular">🔥 Самый популярный</div><div class="solution-icon">💡</div><div class="solution-title">Умный свет</div><div class="solution-price">31 600 ₽</div><div class="solution-meta"><span class="meta-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>1 день</span><span class="meta-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>2 года гарантии</span><span class="meta-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 1v6h6M23 23v-6h-6"/><path d="M3 21L21 3"/></svg>Бесплатный выезд</span></div><ul class="solution-features"><li>Сцены «Вечер», «Кино», «Ушли»</li><li>Автосвет в прихожей и коридоре</li><li>Управление из приложения и голосом</li><li>Hub M2 + 5 выключателей H1 + датчик движения</li></ul><button class="btn btn-primary solution-btn" onclick="scrollToQuiz()">Заказать →</button><div class="solution-utp"><span>✅ Работает без интернета</span><span>🎤 Алиса / Siri</span></div></div>
+  <div class="solution-card" data-category="safety"><div class="solution-icon">💧</div><div class="solution-title">Защита от протечки</div><div class="solution-price">43 900 ₽</div><div class="solution-meta"><span class="meta-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>1 день</span><span class="meta-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>2 года гарантии</span><span class="meta-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 1v6h6M23 23v-6h-6"/><path d="M3 21L21 3"/></svg>Бесплатный выезд</span></div><ul class="solution-features"><li>Контроль мокрых зон в квартире или доме</li><li>Автоматическое перекрытие воды</li><li>Уведомление в телефон</li><li>Hub M2 + 4 датчика протечки T1 + 2 привода крана T1</li></ul><button class="btn btn-primary solution-btn" onclick="scrollToQuiz()">Заказать →</button><div class="solution-utp"><span>✅ Работает без интернета</span><span>💧 Защита от потопа</span></div></div>
+  <div class="solution-card" data-category="safety"><div class="solution-badge best-value">⭐ Выгодный старт</div><div class="solution-icon">🔐</div><div class="solution-title">Умный замок N100</div><div class="solution-price">41 700 ₽</div><div class="solution-meta"><span class="meta-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>1 день</span><span class="meta-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>2 года гарантии</span><span class="meta-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 1v6h6M23 23v-6h-6"/><path d="M3 21L21 3"/></svg>Бесплатный выезд</span></div><ul class="solution-features"><li>Отпечаток, код, карта, смартфон</li><li>Временные коды для гостей</li><li>История входов в приложении</li><li>Hub M2 + умный замок Aqara N100</li></ul><button class="btn btn-primary solution-btn" onclick="scrollToQuiz()">Заказать →</button><div class="solution-utp"><span>✅ Работает без интернета</span><span>🔑 Забудьте о ключах</span></div></div>
+  <div class="solution-card" data-category="climate"><div class="solution-icon">❄️</div><div class="solution-title">Умное отопление</div><div class="solution-price">51 400 ₽</div><div class="solution-meta"><span class="meta-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>1-2 дня</span><span class="meta-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>2 года гарантии</span><span class="meta-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 1v6h6M23 23v-6h-6"/><path d="M3 21L21 3"/></svg>Бесплатный выезд</span></div><ul class="solution-features"><li>Отдельная температура в разных комнатах</li><li>Экономичный режим в ваше отсутствие</li><li>Управление с телефона и голосом</li><li>Hub M2 + 6 термоголовок E1 + 3 датчика климата</li></ul><button class="btn btn-primary solution-btn" onclick="scrollToQuiz()">Заказать →</button><div class="solution-utp"><span>✅ Работает без интернета</span><span>🌡️ Экономия на отоплении</span></div></div>
+  <div class="solution-card" data-category="full"><div class="solution-badge best-value">⭐ Выгодный старт</div><div class="solution-icon">🏠</div><div class="solution-title">Стартовый умный дом</div><div class="solution-price">46 200 ₽</div><div class="solution-meta"><span class="meta-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>1-2 дня</span><span class="meta-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>2 года гарантии</span><span class="meta-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 1v6h6M23 23v-6h-6"/><path d="M3 21L21 3"/></svg>Бесплатный выезд</span></div><ul class="solution-features"><li>Сразу закрывает основные бытовые задачи</li><li>Даёт понятный эффект с первого дня</li><li>Не перегружает бюджет, легко расширяется</li><li>Hub M2 + 4 выключателя H1 + 3 датчика открытия + 2 датчика движения + 2 датчика протечки</li></ul><button class="btn btn-primary solution-btn" onclick="scrollToQuiz()">Заказать →</button><div class="solution-utp"><span>✅ Работает без интернета</span><span>🎤 Алиса / Siri</span></div></div>
+  <div class="solution-card" data-category="full"><div class="solution-icon">🏡</div><div class="solution-title">Умная дача / дом</div><div class="solution-price">51 200 ₽</div><div class="solution-meta"><span class="meta-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>2 дня</span><span class="meta-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>2 года гарантии</span><span class="meta-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 1v6h6M23 23v-6h-6"/><path d="M3 21L21 3"/></svg>Бесплатный выезд</span></div><ul class="solution-features"><li>Удалённый контроль: двери, окна, движение, температура, протечки, дым</li><li>Работает локально без интернета</li><li>Подходит для дома, который не под ежедневным присмотром</li><li>Hub M3 + полный набор датчиков</li></ul><button class="btn btn-primary solution-btn" onclick="scrollToQuiz()">Заказать →</button><div class="solution-utp"><span>✅ Работает без интернета</span><span>📡 Удалённый контроль</span></div></div>
+  <div class="solution-card" data-category="full"><div class="solution-icon">🛋️</div><div class="solution-title">Умные шторы</div><div class="solution-price">32 800 ₽</div><div class="solution-meta"><span class="meta-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>1 день</span><span class="meta-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>2 года гарантии</span><span class="meta-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 1v6h6M23 23v-6h-6"/><path d="M3 21L21 3"/></svg>Бесплатный выезд</span></div><ul class="solution-features"><li>Открытие по времени и сценариям</li><li>Голосовое управление через Алису</li><li>Подходит для спальни и гостиной</li><li>Hub M2 + 2 мотора Curtain Driver E1</li></ul><button class="btn btn-primary solution-btn" onclick="scrollToQuiz()">Заказать →</button><div class="solution-utp"><span>✅ Работает без интернета</span><span>🎤 Алиса / Siri</span></div></div>
 </div>
 <div class="consult-block"><h3>📞 Нужна консультация?</h3><p>Закажите бесплатный выезд мастера — подберём решение под вашу квартиру или дом без скрытых платежей.</p><button class="btn btn-primary btn-lg" onclick="scrollToQuiz()">Заказать бесплатный выезд →</button></div></div></section>
 
-<!-- КАК МЫ РАБОТАЕМ (без изменений) -->
+<!-- КАК МЫ РАБОТАЕМ -->
 <section class="process" id="process"><div class="container"><div class="process__inner"><div><div class="section-label reveal">Как мы работаем</div><h2 class="section-title reveal">Три шага <em>к умному дому</em></h2><p class="section-desc reveal" style="margin-bottom:var(--space-10)">Без лишней суеты: берём на себя подбор, монтаж и настройку — вам остаётся только пользоваться.</p><div class="process__steps"><div class="step reveal"><div class="step__num">1</div><div><div class="step__title"><span>📞</span> Консультация и выезд</div><div class="step__desc">Разберём вашу задачу, приедем на объект, оценим электрику и подготовим понятную смету. Бесплатно.</div></div></div><div class="step reveal"><div class="step__num">2</div><div><div class="step__title"><span>🔧</span> Поставка и монтаж</div><div class="step__desc">Сами закупим оборудование, аккуратно установим устройства Aqara, настроим хаб, сценарии и голосовое управление.</div></div></div><div class="step reveal"><div class="step__num">3</div><div><div class="step__title"><span>🎓</span> Обучение и поддержка</div><div class="step__desc">Покажем, как всем пользоваться, оставим понятные инструкции и дадим 2 года гарантии на монтаж.</div></div></div></div><div class="process__trust reveal"><div class="trust-badge"><div class="trust-badge__value">10+ лет</div><div class="trust-badge__label">в электромонтаже</div></div><div class="trust-badge"><div class="trust-badge__value">2 года</div><div class="trust-badge__label">гарантии на монтаж</div></div></div></div><div class="process__photo reveal"><img alt="Монтаж системы умного дома Aqara" decoding="async" height="1024" loading="lazy" src="./generated-image-5.jpg" width="768"/></div></div></div></section>
 
-<!-- ОСНОВАТЕЛЬ (без изменений) -->
+<!-- ОСНОВАТЕЛЬ -->
 <section class="owner" id="about"><div class="container"><div class="owner__inner"><div class="owner__img reveal"><img alt="Андрей — основатель СмартАтмосфера" decoding="async" height="800" loading="lazy" src="./owner_360.jpg" width="640" onerror="this.src='https://placehold.co/640x800/1a1b18/2ab5a0?text=Андрей'"/></div><div class="owner__content reveal"><div class="section-label">Кто мы</div><h2 class="owner__name">Андрей — <em>основатель</em></h2><p class="owner__desc">Занимаюсь электромонтажом более 10 лет. Умный дом начал изучать, когда сам установил Aqara в своей квартире — и понял, что это реально меняет жизнь. Теперь помогаю другим сделать то же самое без лишних проблем.</p><p class="owner__desc">Я не просто монтажник — у меня профессиональное образование по электрике, поэтому делаю всё по уму: без «ковровых» решений, без лишних расходов для клиента. Каждый проект — под вашу задачу, а не по шаблону.</p><div class="owner__stats"><div class="stat-item"><div class="stat-item__value">10+ лет</div><div class="stat-item__label">в электромонтаже</div></div><div class="stat-item"><div class="stat-item__value">Профильное</div><div class="stat-item__label">образование по электрике</div></div><div class="stat-item"><div class="stat-item__value">Под задачу</div><div class="stat-item__label">не по шаблону</div></div></div></div></div></div></section>
 
-<!-- ПРЕИМУЩЕСТВА (без изменений) -->
-<section class="advantages"><div class="container"><div class="section-label reveal">Почему выбирают нас</div><h2 class="section-title reveal">Работать с нами <em>выгодно и удобно</em></h2><div class="advantages__grid"><div class="advantage-card reveal"><div class="advantage-icon">🚚</div><div class="advantage-title">Бесплатный выезд</div><div class="advantage-desc">Приедем на замер в удобное время, составим смету — всё бесплатно, без скрытых условий.</div></div><div class="advantage-card reveal"><div class="advantage-icon">🛡️</div><div class="advantage-title">Гарантия 2 года</div><div class="advantage-desc">На все виды монтажных работ. Уверенность в качестве и спокойствие для вас.</div></div><div class="advantage-card reveal"><div class="advantage-icon">🔧</div><div class="advantage-title">Работаем с Aqara</div><div class="advantage-desc">Только оригинальное оборудование с локальными сценариями, без облачной зависимости.</div></div><div class="advantage-card reveal"><div class="advantage-icon">📱</div><div class="advantage-title">Настройка под ключ</div><div class="advantage-desc">Сценарии, голосовое управление, интеграция с Алисой и Apple Home — всё настроим.</div></div><div class="advantage-card reveal"><div class="advantage-icon">💡</div><div class="advantage-title">Помощь с выбором</div><div class="advantage-desc">Не знаете, с чего начать? Подберём оптимальный набор устройств под ваш бюджет и задачи.</div></div></div></div></section>
+<!-- ПРЕИМУЩЕСТВА -->
+<section class="advantages"><div class="container"><div class="section-label reveal">Почему выбирают нас</div><h2 class="section-title reveal">Работать с нами <em>выгодно и удобно</em></h2><div class="advantages__grid"><div class="advantage-card reveal"><div class="advantage-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M1 1v6h6M23 23v-6h-6"/><path d="M3 21L21 3"/></svg></div><div class="advantage-title">Бесплатный выезд</div><div class="advantage-desc">Приедем на замер в удобное время, составим смету — всё бесплатно, без скрытых условий.</div></div><div class="advantage-card reveal"><div class="advantage-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div class="advantage-title">Гарантия 2 года</div><div class="advantage-desc">На все виды монтажных работ. Уверенность в качестве и спокойствие для вас.</div></div><div class="advantage-card reveal"><div class="advantage-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div><div class="advantage-title">Работаем с Aqara</div><div class="advantage-desc">Только оригинальное оборудование с локальными сценариями, без облачной зависимости.</div></div><div class="advantage-card reveal"><div class="advantage-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div><div class="advantage-title">Настройка под ключ</div><div class="advantage-desc">Сценарии, голосовое управление, интеграция с Алисой и Apple Home — всё настроим.</div></div><div class="advantage-card reveal"><div class="advantage-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg></div><div class="advantage-title">Помощь с выбором</div><div class="advantage-desc">Не знаете, с чего начать? Подберём оптимальный набор устройств под ваш бюджет и задачи.</div></div></div></div></section>
 
-<!-- УСТРОЙСТВА (без изменений) -->
+<!-- УСТРОЙСТВА -->
 <section aria-label="Устройства Aqara" class="devices" id="devices"><div class="container"><div class="devices__inner"><div><div class="section-label reveal">Оборудование</div><h2 class="section-title reveal">Работаем <em>на Aqara</em></h2><p class="section-desc reveal" style="margin-bottom:var(--space-10)">Aqara — мировой лидер в сегменте умного дома. Все устройства работают без интернета, совместимы с Алисой, Apple Home и Google Home.</p><div class="devices__list"><div class="device-item reveal"><div class="device-item__dot"></div><div><div class="device-item__title">Умные выключатели и диммеры</div><div class="device-item__desc">Устанавливаются вместо обычных, управляются с телефона и голосом.</div></div></div><div class="device-item reveal"><div class="device-item__dot"></div><div><div class="device-item__title">Хаб и шлюзы</div><div class="device-item__desc">Мозг системы. Обеспечивает работу всех устройств офлайн, без зависимости от облака.</div></div></div><div class="device-item reveal"><div class="device-item__dot"></div><div><div class="device-item__title">Датчики движения, дверей, протечки</div><div class="device-item__desc">Работают от батарейки 2–3 года. Мгновенные уведомления на телефон.</div></div></div><div class="device-item reveal"><div class="device-item__dot"></div><div><div class="device-item__title">Умные шторы и жалюзи</div><div class="device-item__desc">Автоматическое открытие утром, управление сценами освещения.</div></div></div><div class="device-item reveal"><div class="device-item__dot"></div><div><div class="device-item__title">Климатическое оборудование</div><div class="device-item__desc">Термостаты, датчики CO₂, управление кондиционером по расписанию.</div></div></div></div></div><div class="devices__img reveal"><img alt="Устройства умного дома Aqara" decoding="async" height="480" loading="lazy" src="https://user-gen-media-assets.s3.amazonaws.com/gemini_images/66e43d99-786e-49bf-8543-461fa021fd45.png" width="600"/></div></div></div></section>
 
-<!-- КАЛЬКУЛЯТОР (ИСПРАВЛЕНА ЛОГИКА ПЕРЕХОДОВ) -->
+<!-- КАЛЬКУЛЯТОР -->
 <section aria-label="Калькулятор стоимости" class="quiz" id="quiz"><div class="container--narrow"><div style="text-align:center;margin-bottom:var(--space-10)"><div class="section-label reveal" style="justify-content:center;display:flex">Калькулятор</div><h2 class="section-title reveal">Рассчитайте <em>за 2 минуты</em></h2><p class="section-desc reveal" style="margin-inline:auto">Ответьте на 4 вопроса — мы сразу назовём примерную стоимость и свяжемся с вами.</p></div><div class="quiz__wrapper reveal"><div class="quiz__card" id="quizCard"><div class="quiz__progress"><div class="quiz__progress-bar" id="quizBar" style="width:25%"></div></div>
 <!-- Шаг 1 -->
 <div class="quiz__step active" id="qs1"><div class="quiz__question">Что хотите автоматизировать?</div><div class="quiz__options"><button class="quiz__option" data-step="1" data-val="Умный свет (выключатели)" onclick="selectOpt(this)">💡 Умный свет</button><button class="quiz__option" data-step="1" data-val="Безопасность и датчики" onclick="selectOpt(this)">🔒 Безопасность и датчики</button><button class="quiz__option" data-step="1" data-val="Климат и шторы" onclick="selectOpt(this)">🌡 Климат и шторы</button><button class="quiz__option" data-step="1" data-val="Всё под ключ" onclick="selectOpt(this)">🏠 Всё под ключ</button></div><div class="quiz__nav"><span>Шаг 1 из 4</span><button class="btn btn-primary" onclick="nextStep(2)">Далее →</button></div></div>
@@ -490,32 +394,33 @@ a{color:inherit;text-decoration:none}
 <!-- Шаг 4 -->
 <div class="quiz__step" id="qs4"><div class="quiz__question">Когда планируете?</div><div class="quiz__options"><button class="quiz__option" data-step="4" data-val="Срочно" onclick="selectOpt(this)">Срочно, неделя</button><button class="quiz__option" data-step="4" data-val="Месяц" onclick="selectOpt(this)">В течение месяца</button><button class="quiz__option" data-step="4" data-val="Не срочно" onclick="selectOpt(this)">Присматриваюсь</button></div><div class="quiz__nav"><button class="btn btn-ghost" onclick="prevStep(3)">← Назад</button><button class="btn btn-primary" onclick="calcResult()">Рассчитать →</button></div></div>
 
-<div class="quiz__result" id="qResult"><svg width="64" height="64" viewBox="0 0 64 64"><circle cx="32" cy="32" r="30" stroke="currentColor" stroke-width="2" fill="none" opacity=".25"/><polyline points="20 32 28 40 44 24" stroke="currentColor" stroke-width="3" fill="none"/></svg><div><div class="quiz__result-price" id="qPrice">от 18 000 ₽</div><p class="quiz__result-note">Точная цена после бесплатного выезда. Оставьте контакт — свяжемся через 30 мин.</p></div><div class="quiz__contact-form"><input type="text" id="qName" placeholder="Ваше имя" class="quiz__input"><input type="tel" id="qPhone" placeholder="Телефон или Telegram" class="quiz__input"><div class="quiz__send-btns"><button class="btn btn-tg" onclick="sendQuiz('tg')">Написать в мессенджер</button><button class="btn btn-primary" onclick="callFromQuiz()">Перезвоните</button></div><div class="policy-text">Нажимая кнопку, вы соглашаетесь с обработкой данных</div></div></div><div class="quiz__success" id="qSuccess"><div class="quiz__success-icon">✅</div><h3>Заявка принята!</h3><p>Свяжемся в течение 30 минут.</p></div></div></div></div></section>
+<div class="quiz__result" id="qResult"><svg width="64" height="64" viewBox="0 0 64 64"><circle cx="32" cy="32" r="30" stroke="currentColor" stroke-width="2" fill="none" opacity=".25"/><polyline points="20 32 28 40 44 24" stroke="currentColor" stroke-width="3" fill="none"/></svg><div><div class="quiz__result-price" id="qPrice">от 18 000 ₽</div><p class="quiz__result-note">Точная цена после бесплатного выезда. Оставьте контакт — свяжемся через 30 мин.</p></div><div class="quiz__contact-form"><input type="text" id="qName" placeholder="Ваше имя" class="quiz__input"><input type="tel" id="qPhone" placeholder="Телефон" class="quiz__input phone-mask" autocomplete="tel"><div class="quiz__send-btns"><button class="btn btn-tg" onclick="sendQuiz('tg')">Написать в мессенджер</button><button class="btn btn-primary" onclick="callFromQuiz()">Перезвоните</button></div><div class="policy-text">Нажимая кнопку, вы соглашаетесь с обработкой данных</div></div></div><div class="quiz__success" id="qSuccess"><div class="quiz__success-icon">✅</div><h3>Заявка принята!</h3><p>Свяжемся в течение 30 минут.</p></div></div></div></div></section>
 
-<!-- ОТЗЫВЫ (без изменений) -->
+<!-- ОТЗЫВЫ -->
 <section aria-label="Отзывы клиентов" class="reviews" id="reviews"><div class="container"><div class="reviews__header"><div><div class="section-label reveal">Отзывы</div><h2 class="section-title reveal">Реальные отзывы <em>клиентов</em></h2></div><div class="reviews__external"><a href="#" class="ext-link" target="_blank" rel="noopener">📊 Яндекс.Карты</a><a href="#" class="ext-link" target="_blank" rel="noopener">📈 Google Maps</a><a href="#" class="ext-link" target="_blank" rel="noopener">⭐ 2ГИС</a></div></div><div class="reviews__rating-summary reveal"><div class="rating-value">5,0</div><div class="rating-stars-big">★★★★★</div><div class="rating-text" style="color:var(--text-muted); font-size:var(--text-sm)">— средняя оценка на основе 5 отзывов</div></div><div class="reviews__track" style="padding-inline:clamp(var(--space-4),4vw,var(--space-12))"><article class="review-card"><div class="review-card__rating"><div class="review-card__stars">★★★★★</div><div class="review-card__rating-value">5,0</div></div><p class="review-card__text">"Поставили умный свет во всей квартире за один день. Алиса слушается с первого раза, дети в восторге. Мастер объяснил всё понятно, без лишнего давления."</p><div class="review-card__author"><div class="review-card__avatar">АК</div><div><div class="review-card__name">Алексей Краснов</div><div class="review-card__meta">2-комн. квартира · Тюмень · март 2026</div></div></div></article><article class="review-card"><div class="review-card__rating"><div class="review-card__stars">★★★★★</div><div class="review-card__rating-value">5,0</div></div><p class="review-card__text">"Брали умный дом под ключ — 3 комнаты, прихожая, кухня. Всё работает без нареканий уже 4 месяца. Особенно радует автоматизация штор — просыпаемся с рассветом."</p><div class="review-card__author"><div class="review-card__avatar">МС</div><div><div class="review-card__name">Марина Соловьёва</div><div class="review-card__meta">Умный дом под ключ · январь 2026</div></div></div></article><article class="review-card"><div class="review-card__rating"><div class="review-card__stars">★★★★★</div><div class="review-card__rating-value">5,0</div></div><p class="review-card__text">"Заказывал датчики протечки и умные розетки на кухню. Цена честная, всё объяснили, настроили уведомления. Рекомендую — никакой воды, которую льют на мозги другие компании."</p><div class="review-card__author"><div class="review-card__avatar">ДВ</div><div><div class="review-card__name">Дмитрий Власов</div><div class="review-card__meta">Безопасность и датчики · февраль 2026</div></div></div></article><article class="review-card"><div class="review-card__rating"><div class="review-card__stars">★★★★★</div><div class="review-card__rating-value">5,0</div></div><p class="review-card__text">"Установили систему контроля доступа и видеодомофон Aqara. Всё работает чётко, мастер подсказал, как настроить временные коды для гостей. Очень доволен сервисом."</p><div class="review-card__author"><div class="review-card__avatar">ИК</div><div><div class="review-card__name">Игорь Ковалёв</div><div class="review-card__meta">Частный дом · Тюмень · декабрь 2025</div></div></div></article><article class="review-card"><div class="review-card__rating"><div class="review-card__stars">★★★★★</div><div class="review-card__rating-value">5,0</div></div><p class="review-card__text">"Приятно удивлён оперативностью: позвонил утром, приехали в этот же день, сделали замер, через два дня уже был полностью готов умный свет во всей квартире. Спасибо!"</p><div class="review-card__author"><div class="review-card__avatar">ОП</div><div><div class="review-card__name">Ольга Петрова</div><div class="review-card__meta">1-комн. квартира · Тюмень · ноябрь 2025</div></div></div></article></div><div class="scroll-hint">← листайте →</div></div></section>
 
-<!-- FAQ (без изменений) -->
+<!-- FAQ -->
 <section class="faq" id="faq"><div class="container"><div class="section-label">FAQ</div><h2 class="section-title">Частые вопросы</h2><div class="faq-list"><div class="faq-item"><button class="faq-item__q" onclick="toggleFaq(this)">Нужно ли менять проводку?<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button><div class="faq-item__a">В большинстве случаев нет. Умные выключатели устанавливаются в стандартные подрозетники. При старой проводке подберем решение.</div></div><div class="faq-item"><button class="faq-item__q" onclick="toggleFaq(this)">Работает ли система без интернета?<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button><div class="faq-item__a">Да, хаб Aqara хранит сценарии локально. Даже без интернета работают свет, датчики, расписания.</div></div><div class="faq-item"><button class="faq-item__q" onclick="toggleFaq(this)">Совместимо с Алисой и Apple Home?<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button><div class="faq-item__a">Да. Официальная поддержка Яндекс Алисы, Apple HomeKit, Google Home. Настроим под ваш сценарий.</div></div><div class="faq-item"><button class="faq-item__q" onclick="toggleFaq(this)">Сколько занимает монтаж в Тюмени?<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button><div class="faq-item__a">Базовый умный свет – 1 день. Полная система под ключ – 1–2 дня. Выезжаем по Тюмени и Тюменской области.</div></div></div></div></section>
 
-<!-- SEO БЛОК (без изменений) -->
-<div class="seo-block container"><div class="section-label">Почему выбирают нас в Тюмени</div><h3 class="section-title">Монтаж Aqara <em>с гарантией качества</em></h3><p>Мы работаем с Aqara более 10 лет. Выполняем проекты любой сложности: от установки одного датчика до полной автоматизации коттеджа. Выезжаем на замер бесплатно, даём 2 года гарантии на монтаж. Используем только оригинальное оборудование с локальными сценариями — ваш умный дом не перестанет работать даже при отключении интернета. Работаем с клиентами в Тюмени, Тюменской области, а также соседних районах.</p></div>
+<!-- SEO БЛОК (текст исправлен — убрана привязка к 10 годам для Aqara) -->
+<div class="seo-block container"><div class="section-label">Почему выбирают нас в Тюмени</div><h3 class="section-title">Монтаж Aqara <em>с гарантией качества</em></h3><p>Мы профессионально работаем с оборудованием Aqara. Выполняем проекты любой сложности: от установки одного датчика до полной автоматизации коттеджа. Выезжаем на замер бесплатно, даём 2 года гарантии на монтаж. Используем только оригинальное оборудование с локальными сценариями — ваш умный дом не перестанет работать даже при отключении интернета. Работаем с клиентами в Тюмени, Тюменской области, а также соседних районах.</p></div>
 
-<!-- CTA (без изменений, ссылка на модалку) -->
-<section aria-label="Контакты и обратная связь" class="cta-section"><div class="container"><div class="cta-section__inner"><div><div class="section-label">Свяжитесь с нами</div><h2 class="section-title">Обсудим ваш <em>проект</em></h2><p>Бесплатно подскажем, с чего начать. Ответим в течение 30 минут.</p><div class="cta-section__contacts"><a class="contact-link" href="tel:+79612021807">📞 +7 (961) 202-18-07</a><a class="contact-link" href="#" onclick="openMessengerChoice(); return false;">📱 Написать в мессенджер</a></div></div><form class="cta-form" id="ctaForm" onsubmit="submitCta(event)"><input type="text" id="ctaName" placeholder="Ваше имя" required><input type="tel" id="ctaPhone" placeholder="Телефон" required><textarea id="ctaMsg" placeholder="Опишите задачу (необязательно)"></textarea><button class="btn btn-primary" type="submit">Отправить заявку</button><div class="policy-text">Нажимая кнопку, вы соглашаетесь с обработкой персональных данных</div><div class="cta-form__success" id="ctaSuccess">✓ Заявка отправлена! Свяжемся в течение 30 минут.</div></form></div></div></section>
+<!-- CTA -->
+<section aria-label="Контакты и обратная связь" class="cta-section"><div class="container"><div class="cta-section__inner"><div><div class="section-label">Свяжитесь с нами</div><h2 class="section-title">Обсудим ваш <em>проект</em></h2><p>Бесплатно подскажем, с чего начать. Ответим в течение 30 минут.</p><div class="cta-section__contacts"><a class="contact-link" href="tel:+79612021807">📞 +7 (961) 202-18-07</a><a class="contact-link" href="#" onclick="openMessengerChoice(); return false;">📱 Написать в мессенджер</a></div></div><form class="cta-form" id="ctaForm" onsubmit="submitCta(event)"><input type="text" id="ctaName" placeholder="Ваше имя" required><input type="tel" id="ctaPhone" placeholder="Телефон" class="phone-mask" autocomplete="tel" required><textarea id="ctaMsg" placeholder="Опишите задачу (необязательно)"></textarea><button class="btn btn-primary" type="submit">Отправить заявку</button><div class="policy-text">Нажимая кнопку, вы соглашаетесь с обработкой персональных данных</div><div class="cta-form__success" id="ctaSuccess">✓ Заявка отправлена! Свяжемся в течение 30 минут.</div></form></div></div></section>
 </main>
 
 <footer class="footer"><div class="container"><div class="footer__inner"><div class="footer__brand"><svg width="32" height="32" viewBox="0 0 36 36" fill="none"><rect width="36" height="36" rx="10" fill="var(--primary)"/><path d="M10 22 L18 11 L26 22" stroke="white" stroke-width="2.2" fill="none"/><circle cx="18" cy="25" r="2.5" fill="white"/></svg><span>СмартАтмосфера</span><p>Монтаж умного дома Aqara в Тюмени и Тюменской области. Свет, безопасность, климат под ключ.</p></div><div><div class="footer__col-title">Услуги</div><div class="footer__links"><a href="#services">Умный свет</a><a href="#services">Умный дом под ключ</a><a href="#services">Безопасность</a></div></div><div><div class="footer__col-title">Контакты</div><div class="footer__links"><a href="tel:+79612021807">+7 (961) 202-18-07</a><a href="#" onclick="openMessengerChoice(); return false;">Написать в мессенджер</a><a href="#quiz">Рассчитать стоимость</a></div></div></div><div class="footer__bottom"><span>© 2026 СмартАтмосфера. Тюмень.</span><span>Работаем по Тюмени и Тюменской области</span></div></div></footer>
 
 <div class="sticky-cta"><button class="btn btn-primary" onclick="scrollToQuiz()">Рассчитать</button><a class="btn btn-ghost" href="tel:+79612021807">Позвонить</a><button class="btn btn-tg" onclick="openMessengerChoice()">Написать</button></div>
 
-<!-- ПЛАВАЮЩИЙ ВИДЖЕТ — с выбором мессенджера -->
 <div class="floating-chat">
   <button class="chat-button" onclick="openMessengerChoice()">
     <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z" fill="currentColor"/></svg>
     Готовы ответить на ваши вопросы?
   </button>
 </div>
+
+<button class="scroll-top" id="scrollTopBtn" aria-label="Наверх">↑</button>
 
 <!-- МОДАЛЬНОЕ ОКНО ВЫБОРА МЕССЕНДЖЕРА -->
 <div id="messengerModal" class="modal-messenger">
@@ -531,10 +436,34 @@ a{color:inherit;text-decoration:none}
 </div>
 
 <script>
-// Переменная для хранения текста сообщения, который нужно отправить (если есть)
-let pendingMessage = null;
+// ========== МАСКА ТЕЛЕФОНА ==========
+function setPhoneMask(input) {
+  input.addEventListener('input', function(e) {
+    let x = this.value.replace(/\D/g, '').match(/(\d{0,1})(\d{0,3})(\d{0,3})(\d{0,2})(\d{0,2})/);
+    if (!x) return;
+    let masked = '';
+    if (x[1]) masked = '+' + x[1];
+    if (x[2]) masked += ' (' + x[2];
+    if (x[3]) masked += ') ' + x[3];
+    if (x[4]) masked += '-' + x[4];
+    if (x[5]) masked += '-' + x[5];
+    this.value = masked;
+  });
+}
+document.querySelectorAll('.phone-mask').forEach(setPhoneMask);
 
-// Функция открытия модалки с запоминанием текста
+// ========== КНОПКА НАВЕРХ ==========
+const scrollBtn = document.getElementById('scrollTopBtn');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 300) scrollBtn.classList.add('visible');
+  else scrollBtn.classList.remove('visible');
+});
+scrollBtn.addEventListener('click', () => {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+// ========== ТЕМА, МОБИЛЬНОЕ МЕНЮ, REVEAL, КАЛЬКУЛЯТОР ==========
+let pendingMessage = null;
 function openMessengerChoice(messageText) {
   pendingMessage = messageText || null;
   document.getElementById('messengerModal').classList.add('active');
@@ -545,26 +474,20 @@ function closeMessengerModal() {
   document.body.style.overflow = '';
   pendingMessage = null;
 }
-// Обработчики выбора
 function sendToTelegram() {
   let url = 'https://t.me/smartatmosfera';
-  if (pendingMessage) {
-    url += '?text=' + encodeURIComponent(pendingMessage);
-  }
+  if (pendingMessage) url += '?text=' + encodeURIComponent(pendingMessage);
   window.open(url, '_blank');
   closeMessengerModal();
 }
 function sendToMax() {
   let maxUrl = 'https://max.ru/u/f9LHodD0cOJAXW9z-LvG2Q757f7ylS4VKXa3Wmqkb3le8VduWG04P-BU1pQ';
-  // MAX не поддерживает предзаполнение текста — просто открываем профиль
   window.open(maxUrl, '_blank');
   closeMessengerModal();
 }
-// Назначим обработчики после загрузки
 document.getElementById('chooseTelegramBtn').onclick = sendToTelegram;
 document.getElementById('chooseMaxBtn').onclick = sendToMax;
 
-// Функции sendQuiz и submitCta теперь используют модалку
 function sendQuiz(ch) {
   let name = document.getElementById('qName').value.trim();
   let phone = document.getElementById('qPhone').value.trim();
@@ -593,47 +516,17 @@ function submitCta(e) {
   document.getElementById('ctaForm').querySelector('button').disabled = true;
 }
 
-// Логика калькулятора (исправлена)
 let quizData = {};
-function selectOpt(btn){ 
-  let step = btn.getAttribute('data-step'); 
-  let val = btn.getAttribute('data-val'); 
-  quizData['step'+step] = val; 
-  document.querySelectorAll(`[data-step="${step}"]`).forEach(b=>b.classList.remove('selected')); 
-  btn.classList.add('selected'); 
-}
-function showStep(n){ 
-  for(let i=1;i<=4;i++){ 
-    let s=document.getElementById('qs'+i); 
-    if(s) s.classList.toggle('active', i===n); 
-  } 
-  document.getElementById('quizBar').style.width=(n/4)*100+'%'; 
-}
-function nextStep(n){ 
-  if(n && n>=2 && n<=4) showStep(n); 
-}
-function prevStep(n){ 
-  if(n && n>=1 && n<=3) showStep(n); 
-}
-function calcResult(){ 
-  let svc=quizData.step1||'Умный свет (выключатели)'; 
-  let room=quizData.step2||'1-комн. квартира'; 
-  let wire=quizData.step3||'Рабочая'; 
-  let prices={'Умный свет (выключатели)':12000,'Безопасность и датчики':18000,'Климат и шторы':22000,'Всё под ключ':45000}; 
-  let base=prices[svc]||12000; 
-  let roomM={'1-комн. квартира':1,'2-3-комн. квартира':1.6,'Частный дом':2.5}; 
-  let wireM={'Новостройка':1,'Рабочая':1.1,'Старая':1.4}; 
-  let total=Math.round(base*(roomM[room]||1)*(wireM[wire]||1)/1000)*1000; 
-  document.getElementById('qPrice').innerText='от '+total.toLocaleString('ru-RU')+' ₽'; 
-  document.querySelectorAll('.quiz__step').forEach(s=>s.classList.remove('active')); 
-  document.getElementById('qResult').classList.add('active'); 
-  document.getElementById('quizBar').style.width='100%'; 
-}
+function selectOpt(btn){ let step=btn.getAttribute('data-step'); let val=btn.getAttribute('data-val'); quizData['step'+step]=val; document.querySelectorAll(`[data-step="${step}"]`).forEach(b=>b.classList.remove('selected')); btn.classList.add('selected'); }
+function showStep(n){ for(let i=1;i<=4;i++){ let s=document.getElementById('qs'+i); if(s) s.classList.toggle('active', i===n); } document.getElementById('quizBar').style.width=(n/4)*100+'%'; }
+function nextStep(n){ if(n && n>=2 && n<=4) showStep(n); }
+function prevStep(n){ if(n && n>=1 && n<=3) showStep(n); }
+function calcResult(){ let svc=quizData.step1||'Умный свет (выключатели)'; let room=quizData.step2||'1-комн. квартира'; let wire=quizData.step3||'Рабочая'; let prices={'Умный свет (выключатели)':12000,'Безопасность и датчики':18000,'Климат и шторы':22000,'Всё под ключ':45000}; let base=prices[svc]||12000; let roomM={'1-комн. квартира':1,'2-3-комн. квартира':1.6,'Частный дом':2.5}; let wireM={'Новостройка':1,'Рабочая':1.1,'Старая':1.4}; let total=Math.round(base*(roomM[room]||1)*(wireM[wire]||1)/1000)*1000; document.getElementById('qPrice').innerText='от '+total.toLocaleString('ru-RU')+' ₽'; document.querySelectorAll('.quiz__step').forEach(s=>s.classList.remove('active')); document.getElementById('qResult').classList.add('active'); document.getElementById('quizBar').style.width='100%'; }
 function scrollToQuiz(){ document.getElementById('quiz').scrollIntoView({behavior:'smooth'}); }
 function toggleFaq(btn){ let item=btn.closest('.faq-item'); let isOpen=item.classList.contains('open'); document.querySelectorAll('.faq-item.open').forEach(i=>{i.classList.remove('open'); i.querySelector('button').setAttribute('aria-expanded','false');}); if(!isOpen){ item.classList.add('open'); btn.setAttribute('aria-expanded','true'); } }
 document.querySelectorAll('.filter-chip').forEach(chip=>{ chip.addEventListener('click',function(){ let filter=this.dataset.filter; document.querySelectorAll('.filter-chip').forEach(c=>c.classList.remove('active')); this.classList.add('active'); document.querySelectorAll('.solution-card').forEach(card=>{ if(filter==='all'||card.dataset.category===filter) card.classList.remove('hide'); else card.classList.add('hide'); }); }); });
-let burger=document.getElementById('burgerBtn'), mob=document.getElementById('mobMenu'); function closeMob(){ mob.classList.remove('open'); } if(burger) burger.onclick=()=>mob.classList.toggle('open'); document.querySelectorAll('.mob-menu a').forEach(a=>a.addEventListener('click',closeMob));
-let themeBtn=document.querySelector('[data-theme-toggle]'); if(themeBtn){ let root=document.documentElement; let curr=root.getAttribute('data-theme')||'dark'; themeBtn.onclick=()=>{ let newTheme=curr==='dark'?'light':'dark'; root.setAttribute('data-theme',newTheme); curr=newTheme; themeBtn.innerText=newTheme==='dark'?'🌙':'☀️'; }; }
+let burger=document.getElementById('burgerBtn'), mob=document.getElementById('mobMenu'); function closeMob(){ mob.classList.remove('open'); document.body.classList.remove('menu-open'); } if(burger) burger.onclick=()=>{ mob.classList.toggle('open'); document.body.classList.toggle('menu-open', mob.classList.contains('open')); }; document.querySelectorAll('.mob-menu a').forEach(a=>a.addEventListener('click',closeMob));
+let themeBtn=document.querySelector('[data-theme-toggle]'); if(themeBtn){ let root=document.documentElement; let curr=root.getAttribute('data-theme')||'dark'; themeBtn.onclick=()=>{ let newTheme=curr==='dark'?'light':'dark'; root.setAttribute('data-theme',newTheme); curr=newTheme; themeBtn.innerHTML=newTheme==='dark'?'<svg fill="none" height="18" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="18"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>':'<svg fill="none" height="18" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="18"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2.2M12 19.8V22M4.93 4.93l1.56 1.56M17.51 17.51l1.56 1.56M2 12h2.2M19.8 12H22M4.93 19.07l1.56-1.56M17.51 6.49l1.56-1.56"/></svg>'; }; }
 let observer=new IntersectionObserver(e=>e.forEach(entry=>{if(entry.isIntersecting)entry.target.classList.add('visible');}),{threshold:0.1}); document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
 document.getElementById('logoHome')?.addEventListener('click', function(e){ e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); });
 </script>
