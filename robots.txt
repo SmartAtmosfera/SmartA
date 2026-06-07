@@ -14,4 +14,4 @@ Host: www.smartatmosfera.ru
 
 # Указываем путь к вашей карте сайта (если вы её создадите)
 Sitemap: https://www.smartatmosfera.ru/sitemap.xml
-Sitemap: https://www.smartatmosfera.ru/sitemap.xml
+
