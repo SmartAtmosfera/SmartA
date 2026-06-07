@@ -1,0 +1,16 @@
+# Указываем, что правила общие для всех поисковых роботов
+User-agent: *
+
+# Запрещаем индексировать пустые страницы-заглушки, если они есть
+Disallow: /generated-image-5.jpg
+Disallow: /owner_320.webp
+Disallow: /owner_360.jpg
+Disallow: /owner_480.jpg
+
+# Указываем основное зеркало сайта.
+# ВАЖНО: замените www.smartatmosfera.ru на smartatmosfera.ru,
+# если ваш сайт открывается без www.
+Host: www.smartatmosfera.ru
+
+# Указываем путь к вашей карте сайта (если вы её создадите)
+Sitemap: https://www.smartatmosfera.ru/sitemap.xml
